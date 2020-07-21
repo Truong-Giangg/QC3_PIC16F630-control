@@ -1,0 +1,2823 @@
+
+
+Microchip MPLAB XC8 Assembler V2.20 build 20200408173844 
+                                                                                               Tue Jul 21 06:25:58 2020
+
+Microchip MPLAB XC8 C Compiler v2.20 (Free license) build 20200408173844 Og1 
+     1                           	processor	16F630
+     2                           	pagewidth 120
+     3                           	opt	flic
+     4                           	psect	idataBANK0,global,class=CODE,delta=2,noexec
+     5                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     6                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1,noexec
+     7                           	psect	dataBANK0,global,class=BANK0,space=1,delta=1,noexec
+     8                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1,noexec
+     9                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1,noexec
+    10                           	psect	maintext,global,class=CODE,split=1,delta=2
+    11                           	psect	text1,local,class=CODE,merge=1,delta=2
+    12                           	psect	text2,local,class=CODE,merge=1,delta=2
+    13                           	psect	text3,local,class=CODE,merge=1,delta=2
+    14                           	psect	text4,local,class=CODE,merge=1,delta=2
+    15                           	psect	text5,local,class=CODE,merge=1,delta=2
+    16                           	psect	text6,local,class=CODE,merge=1,delta=2
+    17                           	psect	text7,local,class=CODE,merge=1,delta=2
+    18                           	psect	intentry,global,class=CODE,delta=2
+    19                           	psect	text8,local,class=CODE,merge=1,delta=2
+    20                           	psect	text9,local,class=CODE,merge=1,delta=2
+    21                           	psect	text10,local,class=CODE,merge=1,delta=2
+    22                           	psect	text11,local,class=CODE,merge=1,delta=2
+    23                           	psect	text12,local,class=CODE,merge=1,delta=2
+    24                           	psect	text13,local,class=CODE,merge=1,delta=2
+    25                           	dabs	1,0x5E,2
+    26  0000                     
+    27                           ; Version 2.20
+    28                           ; Generated 12/02/2020 GMT
+    29                           ; 
+    30                           ; Copyright © 2020, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    31                           ; All rights reserved.
+    32                           ; 
+    33                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    34                           ; 
+    35                           ; Redistribution and use in source and binary forms, with or without modification, are
+    36                           ; permitted provided that the following conditions are met:
+    37                           ; 
+    38                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    39                           ;        conditions and the following disclaimer.
+    40                           ; 
+    41                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    42                           ;        of conditions and the following disclaimer in the documentation and/or other
+    43                           ;        materials provided with the distribution.
+    44                           ; 
+    45                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    46                           ;        software without specific prior written permission.
+    47                           ; 
+    48                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    49                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    50                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    51                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    52                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    53                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    54                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    55                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    56                           ; 
+    57                           ; 
+    58                           ; Code-generator required, PIC16F630 Definitions
+    59                           ; 
+    60                           ; SFR Addresses
+    61  0000                     	;# 
+    62  0001                     	;# 
+    63  0002                     	;# 
+    64  0003                     	;# 
+    65  0004                     	;# 
+    66  0005                     	;# 
+    67  0007                     	;# 
+    68  000A                     	;# 
+    69  000B                     	;# 
+    70  000C                     	;# 
+    71  000E                     	;# 
+    72  000E                     	;# 
+    73  000F                     	;# 
+    74  0010                     	;# 
+    75  0019                     	;# 
+    76  0081                     	;# 
+    77  0085                     	;# 
+    78  0087                     	;# 
+    79  008C                     	;# 
+    80  008E                     	;# 
+    81  0090                     	;# 
+    82  0095                     	;# 
+    83  0095                     	;# 
+    84  0096                     	;# 
+    85  0096                     	;# 
+    86  0099                     	;# 
+    87  009A                     	;# 
+    88  009A                     	;# 
+    89  009B                     	;# 
+    90  009C                     	;# 
+    91  009D                     	;# 
+    92  0000                     	;# 
+    93  0001                     	;# 
+    94  0002                     	;# 
+    95  0003                     	;# 
+    96  0004                     	;# 
+    97  0005                     	;# 
+    98  0007                     	;# 
+    99  000A                     	;# 
+   100  000B                     	;# 
+   101  000C                     	;# 
+   102  000E                     	;# 
+   103  000E                     	;# 
+   104  000F                     	;# 
+   105  0010                     	;# 
+   106  0019                     	;# 
+   107  0081                     	;# 
+   108  0085                     	;# 
+   109  0087                     	;# 
+   110  008C                     	;# 
+   111  008E                     	;# 
+   112  0090                     	;# 
+   113  0095                     	;# 
+   114  0095                     	;# 
+   115  0096                     	;# 
+   116  0096                     	;# 
+   117  0099                     	;# 
+   118  009A                     	;# 
+   119  009A                     	;# 
+   120  009B                     	;# 
+   121  009C                     	;# 
+   122  009D                     	;# 
+   123                           
+   124                           	psect	idataBANK0
+   125  0377                     __pidataBANK0:
+   126                           
+   127                           ;initializer for _dem1
+   128  0377  3401               	retlw	1
+   129  0378  3400               	retlw	0
+   130  0019                     _CMCON	set	25
+   131  000B                     _INTCONbits	set	11
+   132  0007                     _PORTCbits	set	7
+   133  0005                     _PORTAbits	set	5
+   134  0007                     _PORTC	set	7
+   135  0081                     _OPTION_REG	set	129
+   136  0085                     _TRISAbits	set	133
+   137  0085                     _TRISA	set	133
+   138  0087                     _TRISCbits	set	135
+   139  009D                     _EECON2	set	157
+   140  009C                     _EECON1bits	set	156
+   141  009A                     _EEDATA	set	154
+   142  009B                     _EEADR	set	155
+   143  0087                     _TRISC	set	135
+   144                           
+   145                           	psect	cinit
+   146  0010                     start_initialization:	
+   147                           ; #config settings
+   148                           
+   149  0010                     __initialization:
+   150                           
+   151                           ; Initialize objects allocated to BANK0
+   152  0010  2377               	fcall	__pidataBANK0	;fetch initializer
+   153  0011  00C1               	movwf	__pdataBANK0& (0+127)
+   154  0012  2378               	fcall	__pidataBANK0+1	;fetch initializer
+   155  0013  00C2               	movwf	(__pdataBANK0+1)& (0+127)
+   156                           
+   157                           ; Clear objects allocated to BANK0
+   158  0014  01BB               	clrf	__pbssBANK0& (0+127)
+   159  0015  01BC               	clrf	(__pbssBANK0+1)& (0+127)
+   160  0016  01BD               	clrf	(__pbssBANK0+2)& (0+127)
+   161  0017  01BE               	clrf	(__pbssBANK0+3)& (0+127)
+   162  0018  01BF               	clrf	(__pbssBANK0+4)& (0+127)
+   163  0019  01C0               	clrf	(__pbssBANK0+5)& (0+127)
+   164  001A                     end_of_initialization:	
+   165                           ;End of C runtime variable initialization code
+   166                           
+   167  001A                     __end_of__initialization:
+   168  001A  0183               	clrf	3
+   169  001B  281C               	ljmp	_main	;jump to C main() function
+   170                           
+   171                           	psect	bssBANK0
+   172  003B                     __pbssBANK0:
+   173  003B                     _changed:
+   174  003B                     	ds	2
+   175  003D                     _dem2:
+   176  003D                     	ds	1
+   177  003E                     _eep1:
+   178  003E                     	ds	1
+   179  003F                     _eepselect:
+   180  003F                     	ds	1
+   181  0040                     _eepdata:
+   182  0040                     	ds	1
+   183                           
+   184                           	psect	dataBANK0
+   185  0041                     __pdataBANK0:
+   186  0041                     _dem1:
+   187  0041                     	ds	2
+   188                           
+   189                           	psect	cstackCOMMON
+   190  0000                     __pcstackCOMMON:
+   191  0000                     ??_volt12:
+   192  0000                     ??_volt9:	
+   193                           ; 1 bytes @ 0x0
+   194                           
+   195  0000                     ??i1_volt12:	
+   196                           ; 1 bytes @ 0x0
+   197                           
+   198  0000                     ??i1_volt9:	
+   199                           ; 1 bytes @ 0x0
+   200                           
+   201                           
+   202                           	psect	cstackBANK0
+   203  0020                     __pcstackBANK0:	
+   204                           ; 1 bytes @ 0x0
+   205                           
+   206  0020                     ?_volt12:
+   207  0020                     ?_volt9:	
+   208                           ; 1 bytes @ 0x0
+   209                           
+   210  0020                     ?_volt5:	
+   211                           ; 1 bytes @ 0x0
+   212                           
+   213  0020                     ?_inc200mv:	
+   214                           ; 1 bytes @ 0x0
+   215                           
+   216  0020                     ?_dec200mv:	
+   217                           ; 1 bytes @ 0x0
+   218                           
+   219  0020                     ?_continuous:	
+   220                           ; 1 bytes @ 0x0
+   221                           
+   222  0020                     ?_ISR:	
+   223                           ; 1 bytes @ 0x0
+   224                           
+   225  0020                     ?_main:	
+   226                           ; 1 bytes @ 0x0
+   227                           
+   228  0020                     ?i1_volt12:	
+   229                           ; 1 bytes @ 0x0
+   230                           
+   231  0020                     ?i1_volt9:	
+   232                           ; 1 bytes @ 0x0
+   233                           
+   234  0020                     ?i1_volt5:	
+   235                           ; 1 bytes @ 0x0
+   236                           
+   237  0020                     ??i1_volt5:	
+   238                           ; 1 bytes @ 0x0
+   239                           
+   240  0020                     ?i1_inc200mv:	
+   241                           ; 1 bytes @ 0x0
+   242                           
+   243  0020                     ??i1_inc200mv:	
+   244                           ; 1 bytes @ 0x0
+   245                           
+   246  0020                     ?i1_dec200mv:	
+   247                           ; 1 bytes @ 0x0
+   248                           
+   249  0020                     ??i1_dec200mv:	
+   250                           ; 1 bytes @ 0x0
+   251                           
+   252  0020                     ?i1_continuous:	
+   253                           ; 1 bytes @ 0x0
+   254                           
+   255                           
+   256                           ; 1 bytes @ 0x0
+   257  0020                     	ds	2
+   258  0022                     ??i1_continuous:
+   259                           
+   260                           ; 1 bytes @ 0x2
+   261  0022                     	ds	3
+   262  0025                     i1continuous@i:
+   263                           
+   264                           ; 2 bytes @ 0x5
+   265  0025                     	ds	2
+   266  0027                     i1continuous@i_185:
+   267                           
+   268                           ; 2 bytes @ 0x7
+   269  0027                     	ds	2
+   270  0029                     ??_ISR:
+   271                           
+   272                           ; 1 bytes @ 0x9
+   273  0029                     	ds	4
+   274  002D                     ??_volt5:
+   275  002D                     ??_inc200mv:	
+   276                           ; 1 bytes @ 0xD
+   277                           
+   278  002D                     ??_dec200mv:	
+   279                           ; 1 bytes @ 0xD
+   280                           
+   281                           
+   282                           ; 1 bytes @ 0xD
+   283  002D                     	ds	2
+   284  002F                     ??_continuous:
+   285                           
+   286                           ; 1 bytes @ 0xF
+   287  002F                     	ds	3
+   288  0032                     continuous@i:
+   289                           
+   290                           ; 2 bytes @ 0x12
+   291  0032                     	ds	2
+   292  0034                     continuous@i_185:
+   293                           
+   294                           ; 2 bytes @ 0x14
+   295  0034                     	ds	2
+   296  0036                     ??_main:
+   297                           
+   298                           ; 1 bytes @ 0x16
+   299  0036                     	ds	3
+   300  0039                     main@t:
+   301                           
+   302                           ; 1 bytes @ 0x19
+   303  0039                     	ds	1
+   304  003A                     main@t1:
+   305                           
+   306                           ; 1 bytes @ 0x1A
+   307  003A                     	ds	1
+   308                           
+   309                           	psect	maintext
+   310  001C                     __pmaintext:	
+   311 ;;
+   312 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   313 ;;
+   314 ;; *************** function _main *****************
+   315 ;; Defined at:
+   316 ;;		line 138 in file "QC3-16F630-C.c"
+   317 ;; Parameters:    Size  Location     Type
+   318 ;;		None
+   319 ;; Auto vars:     Size  Location     Type
+   320 ;;  t1              1   26[BANK0 ] unsigned char 
+   321 ;;  t               1   25[BANK0 ] unsigned char 
+   322 ;; Return value:  Size  Location     Type
+   323 ;;                  1    wreg      void 
+   324 ;; Registers used:
+   325 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+   326 ;; Tracked objects:
+   327 ;;		On entry : B00/0
+   328 ;;		On exit  : 0/0
+   329 ;;		Unchanged: 0/0
+   330 ;; Data sizes:     COMMON   BANK0
+   331 ;;      Params:         0       0
+   332 ;;      Locals:         0       2
+   333 ;;      Temps:          0       3
+   334 ;;      Totals:         0       5
+   335 ;;Total ram usage:        5 bytes
+   336 ;; Hardware stack levels required when called:    5
+   337 ;; This function calls:
+   338 ;;		_continuous
+   339 ;;		_dec200mv
+   340 ;;		_inc200mv
+   341 ;;		_volt12
+   342 ;;		_volt5
+   343 ;;		_volt9
+   344 ;; This function is called by:
+   345 ;;		Startup code after reset
+   346 ;; This function uses a non-reentrant model
+   347 ;;
+   348                           
+   349                           
+   350                           ;psect for function _main
+   351  001C                     _main:
+   352  001C                     l1406:	
+   353                           ;incstack = 0
+   354                           ; Regs used in _main: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+   355                           
+   356                           
+   357                           ;QC3-16F630-C.c: 139:     TRISA = 1;
+   358  001C  3001               	movlw	1
+   359  001D  1683               	bsf	3,5	;RP0=1, select bank1
+   360  001E  0085               	movwf	5	;volatile
+   361  001F                     l1408:
+   362                           
+   363                           ;QC3-16F630-C.c: 140:     TRISCbits.TRISC0 = 0x00;
+   364  001F  1007               	bcf	7,0	;volatile
+   365  0020                     l1410:
+   366                           
+   367                           ;QC3-16F630-C.c: 141:     TRISCbits.TRISC2 = 0x00;
+   368  0020  1107               	bcf	7,2	;volatile
+   369  0021                     l1412:
+   370                           
+   371                           ;QC3-16F630-C.c: 142:     TRISCbits.TRISC1 = 0x00;
+   372  0021  1087               	bcf	7,1	;volatile
+   373  0022                     l1414:
+   374                           
+   375                           ;QC3-16F630-C.c: 143:     TRISAbits.TRISA5 = 0x00;
+   376  0022  1285               	bcf	5,5	;volatile
+   377  0023                     l1416:
+   378                           
+   379                           ;QC3-16F630-C.c: 144:     PORTCbits.RC0 = 0;
+   380  0023  1283               	bcf	3,5	;RP0=0, select bank0
+   381  0024  1007               	bcf	7,0	;volatile
+   382  0025                     l1418:
+   383                           
+   384                           ;QC3-16F630-C.c: 145:     PORTCbits.RC1 = 0;
+   385  0025  1087               	bcf	7,1	;volatile
+   386  0026                     l1420:
+   387                           
+   388                           ;QC3-16F630-C.c: 146:     PORTCbits.RC2 = 0;
+   389  0026  1107               	bcf	7,2	;volatile
+   390  0027                     l1422:
+   391                           
+   392                           ;QC3-16F630-C.c: 147:     PORTAbits.RA1 = 0;
+   393  0027  1085               	bcf	5,1	;volatile
+   394                           
+   395                           ;QC3-16F630-C.c: 148:     CMCON = 0b00000111;
+   396  0028  3007               	movlw	7
+   397  0029  0099               	movwf	25	;volatile
+   398  002A                     l1424:
+   399                           
+   400                           ;QC3-16F630-C.c: 149:     OPTION_REG = 0b00000000;
+   401  002A  1683               	bsf	3,5	;RP0=1, select bank1
+   402  002B  0181               	clrf	1	;volatile
+   403  002C                     l1426:
+   404                           
+   405                           ;QC3-16F630-C.c: 150:     INTCONbits.GIE =1;
+   406  002C  178B               	bsf	11,7	;volatile
+   407  002D                     l1428:
+   408                           
+   409                           ;QC3-16F630-C.c: 151:     INTCONbits.PEIE = 1;
+   410  002D  170B               	bsf	11,6	;volatile
+   411  002E                     l1430:
+   412                           
+   413                           ;QC3-16F630-C.c: 152:     INTCONbits.INTE =1;
+   414  002E  160B               	bsf	11,4	;volatile
+   415  002F                     l1432:
+   416                           
+   417                           ;QC3-16F630-C.c: 154:     TRISAbits.TRISA0 = 0x01;
+   418  002F  1405               	bsf	5,0	;volatile
+   419  0030                     l1434:
+   420                           
+   421                           ;QC3-16F630-C.c: 155:     TRISAbits.TRISA4 = 0x01;
+   422  0030  1605               	bsf	5,4	;volatile
+   423  0031                     l1436:
+   424                           
+   425                           ;QC3-16F630-C.c: 156:     TRISAbits.TRISA2 = 0x01;
+   426  0031  1505               	bsf	5,2	;volatile
+   427  0032                     l1438:
+   428                           
+   429                           ;QC3-16F630-C.c: 159:     TRISCbits.TRISC3 = 0x00;
+   430  0032  1187               	bcf	7,3	;volatile
+   431  0033                     l1440:
+   432                           
+   433                           ;QC3-16F630-C.c: 160:     PORTCbits.RC3 = 0;
+   434  0033  1283               	bcf	3,5	;RP0=0, select bank0
+   435  0034  1187               	bcf	7,3	;volatile
+   436  0035                     l1442:
+   437                           
+   438                           ;QC3-16F630-C.c: 161:     _delay((unsigned long)((100)*(20000000/4000.0)));
+   439  0035  3003               	movlw	3
+   440  0036  00B8               	movwf	??_main+2
+   441  0037  308A               	movlw	138
+   442  0038  00B7               	movwf	??_main+1
+   443  0039  3055               	movlw	85
+   444  003A  00B6               	movwf	??_main
+   445  003B                     u517:
+   446  003B  0BB6               	decfsz	??_main,f
+   447  003C  283B               	goto	u517
+   448  003D  0BB7               	decfsz	??_main+1,f
+   449  003E  283B               	goto	u517
+   450  003F  0BB8               	decfsz	??_main+2,f
+   451  0040  283B               	goto	u517
+   452  0041  2842               	nop2
+   453  0042                     l1444:
+   454                           
+   455                           ;QC3-16F630-C.c: 162:     TRISCbits.TRISC3 = 0x01;
+   456  0042  1683               	bsf	3,5	;RP0=1, select bank1
+   457  0043  1587               	bsf	7,3	;volatile
+   458  0044                     l1446:
+   459                           
+   460                           ;QC3-16F630-C.c: 163:     _delay((unsigned long)((10)*(20000000/4000.0)));
+   461  0044  3041               	movlw	65
+   462  0045  1283               	bcf	3,5	;RP0=0, select bank0
+   463  0046  00B7               	movwf	??_main+1
+   464  0047  30EE               	movlw	238
+   465  0048  00B6               	movwf	??_main
+   466  0049                     u527:
+   467  0049  0BB6               	decfsz	??_main,f
+   468  004A  2849               	goto	u527
+   469  004B  0BB7               	decfsz	??_main+1,f
+   470  004C  2849               	goto	u527
+   471  004D  0000               	nop
+   472  004E                     l1448:
+   473                           
+   474                           ;QC3-16F630-C.c: 167:     EEADR = 0x00;
+   475  004E  1683               	bsf	3,5	;RP0=1, select bank1
+   476  004F  019B               	clrf	27	;volatile
+   477  0050                     l1450:
+   478                           
+   479                           ;QC3-16F630-C.c: 168:     EECON1bits.RD = 1;
+   480  0050  141C               	bsf	28,0	;volsfr
+   481  0051                     l1452:
+   482                           
+   483                           ;QC3-16F630-C.c: 169:     eepdata = EEDATA;
+   484  0051  081A               	movf	26,w	;volatile
+   485  0052  00DF               	movwf	btemp+1
+   486  0053  085F               	movf	btemp+1,w
+   487  0054  1283               	bcf	3,5	;RP0=0, select bank0
+   488  0055  00C0               	movwf	_eepdata
+   489  0056                     l1454:
+   490                           
+   491                           ;QC3-16F630-C.c: 171:     _delay((unsigned long)((20)*(20000000/4000.0)));
+   492  0056  3082               	movlw	130
+   493  0057  00B7               	movwf	??_main+1
+   494  0058  30DD               	movlw	221
+   495  0059  00B6               	movwf	??_main
+   496  005A                     u537:
+   497  005A  0BB6               	decfsz	??_main,f
+   498  005B  285A               	goto	u537
+   499  005C  0BB7               	decfsz	??_main+1,f
+   500  005D  285A               	goto	u537
+   501  005E  285F               	nop2
+   502  005F                     l1456:
+   503                           
+   504                           ;QC3-16F630-C.c: 172:     EEADR = 0x01;
+   505  005F  3001               	movlw	1
+   506  0060  1683               	bsf	3,5	;RP0=1, select bank1
+   507  0061  009B               	movwf	27	;volatile
+   508  0062                     l1458:
+   509                           
+   510                           ;QC3-16F630-C.c: 173:     EECON1bits.RD = 1;
+   511  0062  141C               	bsf	28,0	;volsfr
+   512  0063                     l1460:
+   513                           
+   514                           ;QC3-16F630-C.c: 174:     eepselect = EEDATA;
+   515  0063  081A               	movf	26,w	;volatile
+   516  0064  00DF               	movwf	btemp+1
+   517  0065  085F               	movf	btemp+1,w
+   518  0066  1283               	bcf	3,5	;RP0=0, select bank0
+   519  0067  00BF               	movwf	_eepselect
+   520  0068                     l1462:
+   521                           
+   522                           ;QC3-16F630-C.c: 176:     if(eepdata == 0x60){
+   523  0068  3060               	movlw	96
+   524  0069  0640               	xorwf	_eepdata,w
+   525  006A  1D03               	btfss	3,2
+   526  006B  286D               	goto	u391
+   527  006C  286E               	goto	u390
+   528  006D                     u391:
+   529  006D  2871               	goto	l1468
+   530  006E                     u390:
+   531  006E                     l1464:
+   532                           
+   533                           ;QC3-16F630-C.c: 177:         dem1 = 0;
+   534  006E  01C1               	clrf	_dem1
+   535  006F  01C2               	clrf	_dem1+1
+   536  0070                     l1466:
+   537                           
+   538                           ;QC3-16F630-C.c: 178:         volt12();
+   539  0070  2344               	fcall	_volt12
+   540  0071                     l1468:
+   541                           
+   542                           ;QC3-16F630-C.c: 180:     if(eepdata == 0x25 && eepselect == 0x00 ){
+   543  0071  3025               	movlw	37
+   544  0072  1283               	bcf	3,5	;RP0=0, select bank0
+   545  0073  0640               	xorwf	_eepdata,w
+   546  0074  1D03               	btfss	3,2
+   547  0075  2877               	goto	u401
+   548  0076  2878               	goto	u400
+   549  0077                     u401:
+   550  0077  2882               	goto	l1476
+   551  0078                     u400:
+   552  0078                     l1470:
+   553  0078  083F               	movf	_eepselect,w
+   554  0079  1D03               	btfss	3,2
+   555  007A  287C               	goto	u411
+   556  007B  287D               	goto	u410
+   557  007C                     u411:
+   558  007C  2882               	goto	l1476
+   559  007D                     u410:
+   560  007D                     l1472:
+   561                           
+   562                           ;QC3-16F630-C.c: 181:         dem1 = 1;
+   563  007D  3001               	movlw	1
+   564  007E  00C1               	movwf	_dem1
+   565  007F  3000               	movlw	0
+   566  0080  00C2               	movwf	_dem1+1
+   567  0081                     l1474:
+   568                           
+   569                           ;QC3-16F630-C.c: 182:         volt5();
+   570  0081  2283               	fcall	_volt5
+   571  0082                     l1476:
+   572                           
+   573                           ;QC3-16F630-C.c: 184:     if(eepdata == 0x45){
+   574  0082  3045               	movlw	69
+   575  0083  1283               	bcf	3,5	;RP0=0, select bank0
+   576  0084  0640               	xorwf	_eepdata,w
+   577  0085  1D03               	btfss	3,2
+   578  0086  2888               	goto	u421
+   579  0087  2889               	goto	u420
+   580  0088                     u421:
+   581  0088  288E               	goto	l1482
+   582  0089                     u420:
+   583  0089                     l1478:
+   584                           
+   585                           ;QC3-16F630-C.c: 185:         dem1 = 4;
+   586  0089  3004               	movlw	4
+   587  008A  00C1               	movwf	_dem1
+   588  008B  3000               	movlw	0
+   589  008C  00C2               	movwf	_dem1+1
+   590  008D                     l1480:
+   591                           
+   592                           ;QC3-16F630-C.c: 186:         volt9();
+   593  008D  2333               	fcall	_volt9
+   594  008E                     l1482:
+   595                           
+   596                           ;QC3-16F630-C.c: 188:     if(eepdata == 0x25 && eepselect == 0x01){
+   597  008E  3025               	movlw	37
+   598  008F  1283               	bcf	3,5	;RP0=0, select bank0
+   599  0090  0640               	xorwf	_eepdata,w
+   600  0091  1D03               	btfss	3,2
+   601  0092  2894               	goto	u431
+   602  0093  2895               	goto	u430
+   603  0094                     u431:
+   604  0094  289F               	goto	l1490
+   605  0095                     u430:
+   606  0095                     l1484:
+   607  0095  033F               	decf	_eepselect,w
+   608  0096  1D03               	btfss	3,2
+   609  0097  2899               	goto	u441
+   610  0098  289A               	goto	u440
+   611  0099                     u441:
+   612  0099  289F               	goto	l1490
+   613  009A                     u440:
+   614  009A                     l1486:
+   615                           
+   616                           ;QC3-16F630-C.c: 189:         dem1 = 2;
+   617  009A  3002               	movlw	2
+   618  009B  00C1               	movwf	_dem1
+   619  009C  3000               	movlw	0
+   620  009D  00C2               	movwf	_dem1+1
+   621  009E                     l1488:
+   622                           
+   623                           ;QC3-16F630-C.c: 190:         continuous();
+   624  009E  2106               	fcall	_continuous
+   625  009F                     l1490:
+   626                           
+   627                           ;QC3-16F630-C.c: 192:     if(eepdata != 0x25 && eepselect == 0x01){
+   628  009F  3025               	movlw	37
+   629  00A0  1283               	bcf	3,5	;RP0=0, select bank0
+   630  00A1  0640               	xorwf	_eepdata,w
+   631  00A2  1903               	btfsc	3,2
+   632  00A3  28A5               	goto	u451
+   633  00A4  28A6               	goto	u450
+   634  00A5                     u451:
+   635  00A5  28B4               	goto	l1498
+   636  00A6                     u450:
+   637  00A6                     l1492:
+   638  00A6  033F               	decf	_eepselect,w
+   639  00A7  1D03               	btfss	3,2
+   640  00A8  28AA               	goto	u461
+   641  00A9  28AB               	goto	u460
+   642  00AA                     u461:
+   643  00AA  28B4               	goto	l1498
+   644  00AB                     u460:
+   645  00AB                     l1494:
+   646                           
+   647                           ;QC3-16F630-C.c: 193:         dem1 = 2;
+   648  00AB  3002               	movlw	2
+   649  00AC  00C1               	movwf	_dem1
+   650  00AD  3000               	movlw	0
+   651  00AE  00C2               	movwf	_dem1+1
+   652                           
+   653                           ;QC3-16F630-C.c: 194:         changed = 1;
+   654  00AF  3001               	movlw	1
+   655  00B0  00BB               	movwf	_changed
+   656  00B1  3000               	movlw	0
+   657  00B2  00BC               	movwf	_changed+1
+   658  00B3                     l1496:
+   659                           
+   660                           ;QC3-16F630-C.c: 195:         continuous();
+   661  00B3  2106               	fcall	_continuous
+   662  00B4                     l1498:
+   663                           
+   664                           ;QC3-16F630-C.c: 197:     if(eepdata == 0xff ){
+   665  00B4  1283               	bcf	3,5	;RP0=0, select bank0
+   666  00B5  0A40               	incf	_eepdata,w
+   667  00B6  1D03               	btfss	3,2
+   668  00B7  28B9               	goto	u471
+   669  00B8  28BA               	goto	u470
+   670  00B9                     u471:
+   671  00B9  28FF               	goto	l1542
+   672  00BA                     u470:
+   673  00BA                     l1500:
+   674                           
+   675                           ;QC3-16F630-C.c: 198:         volt5();
+   676  00BA  2283               	fcall	_volt5
+   677  00BB  28FF               	goto	l1542
+   678  00BC                     l96:
+   679                           
+   680                           ;QC3-16F630-C.c: 204:         if(PORTAbits.RA0 == 0){
+   681  00BC  1805               	btfsc	5,0	;volatile
+   682  00BD  28BF               	goto	u481
+   683  00BE  28C0               	goto	u480
+   684  00BF                     u481:
+   685  00BF  28D7               	goto	l1520
+   686  00C0                     u480:
+   687  00C0                     l1502:
+   688                           
+   689                           ;QC3-16F630-C.c: 205:             inc200mv();
+   690  00C0  22CF               	fcall	_inc200mv
+   691  00C1                     l1504:
+   692                           
+   693                           ;QC3-16F630-C.c: 207:             dem2 ++;
+   694  00C1  3001               	movlw	1
+   695  00C2  00DF               	movwf	btemp+1
+   696  00C3  085F               	movf	btemp+1,w
+   697  00C4  1283               	bcf	3,5	;RP0=0, select bank0
+   698  00C5  07BD               	addwf	_dem2,f
+   699  00C6                     l1506:
+   700                           
+   701                           ;QC3-16F630-C.c: 208:             EEADR = 0x00;
+   702  00C6  1683               	bsf	3,5	;RP0=1, select bank1
+   703  00C7  019B               	clrf	27	;volatile
+   704  00C8                     l1508:
+   705                           
+   706                           ;QC3-16F630-C.c: 209:             char t = 0x25 + dem2;
+   707  00C8  1283               	bcf	3,5	;RP0=0, select bank0
+   708  00C9  083D               	movf	_dem2,w
+   709  00CA  3E25               	addlw	37
+   710  00CB  00DF               	movwf	btemp+1
+   711  00CC  085F               	movf	btemp+1,w
+   712  00CD  00B9               	movwf	main@t
+   713  00CE                     l1510:
+   714                           
+   715                           ;QC3-16F630-C.c: 210:             EEDATA = t;
+   716  00CE  0839               	movf	main@t,w
+   717  00CF  1683               	bsf	3,5	;RP0=1, select bank1
+   718  00D0  009A               	movwf	26	;volatile
+   719  00D1                     l1512:
+   720                           
+   721                           ;QC3-16F630-C.c: 211:             EECON1bits.WREN = 1;
+   722  00D1  151C               	bsf	28,2	;volsfr
+   723  00D2                     l1514:
+   724                           
+   725                           ;QC3-16F630-C.c: 212:             EECON2 = 0x55;
+   726  00D2  3055               	movlw	85
+   727  00D3  009D               	movwf	29	;volsfr
+   728  00D4                     l1516:
+   729                           
+   730                           ;QC3-16F630-C.c: 213:             EECON2 = 0xAA;
+   731  00D4  30AA               	movlw	170
+   732  00D5  009D               	movwf	29	;volsfr
+   733  00D6                     l1518:
+   734                           
+   735                           ;QC3-16F630-C.c: 214:             EECON1bits.WR = 1;
+   736  00D6  149C               	bsf	28,1	;volsfr
+   737  00D7                     l1520:
+   738                           
+   739                           ;QC3-16F630-C.c: 217:         if(PORTAbits.RA4 == 0){
+   740  00D7  1283               	bcf	3,5	;RP0=0, select bank0
+   741  00D8  1A05               	btfsc	5,4	;volatile
+   742  00D9  28DB               	goto	u491
+   743  00DA  28DC               	goto	u490
+   744  00DB                     u491:
+   745  00DB  28F1               	goto	l1540
+   746  00DC                     u490:
+   747  00DC                     l1522:
+   748                           
+   749                           ;QC3-16F630-C.c: 218:             dec200mv();
+   750  00DC  22E8               	fcall	_dec200mv
+   751  00DD                     l1524:
+   752                           
+   753                           ;QC3-16F630-C.c: 220:             dem2 --;
+   754  00DD  3001               	movlw	1
+   755  00DE  1283               	bcf	3,5	;RP0=0, select bank0
+   756  00DF  02BD               	subwf	_dem2,f
+   757  00E0                     l1526:
+   758                           
+   759                           ;QC3-16F630-C.c: 221:             EEADR = 0x00;
+   760  00E0  1683               	bsf	3,5	;RP0=1, select bank1
+   761  00E1  019B               	clrf	27	;volatile
+   762  00E2                     l1528:
+   763                           
+   764                           ;QC3-16F630-C.c: 222:             char t1 = 0x25 + dem2;
+   765  00E2  1283               	bcf	3,5	;RP0=0, select bank0
+   766  00E3  083D               	movf	_dem2,w
+   767  00E4  3E25               	addlw	37
+   768  00E5  00DF               	movwf	btemp+1
+   769  00E6  085F               	movf	btemp+1,w
+   770  00E7  00BA               	movwf	main@t1
+   771  00E8                     l1530:
+   772                           
+   773                           ;QC3-16F630-C.c: 223:             EEDATA = t1;
+   774  00E8  083A               	movf	main@t1,w
+   775  00E9  1683               	bsf	3,5	;RP0=1, select bank1
+   776  00EA  009A               	movwf	26	;volatile
+   777  00EB                     l1532:
+   778                           
+   779                           ;QC3-16F630-C.c: 224:             EECON1bits.WREN = 1;
+   780  00EB  151C               	bsf	28,2	;volsfr
+   781  00EC                     l1534:
+   782                           
+   783                           ;QC3-16F630-C.c: 225:             EECON2 = 0x55;
+   784  00EC  3055               	movlw	85
+   785  00ED  009D               	movwf	29	;volsfr
+   786  00EE                     l1536:
+   787                           
+   788                           ;QC3-16F630-C.c: 226:             EECON2 = 0xAA;
+   789  00EE  30AA               	movlw	170
+   790  00EF  009D               	movwf	29	;volsfr
+   791  00F0                     l1538:
+   792                           
+   793                           ;QC3-16F630-C.c: 227:             EECON1bits.WR = 1;
+   794  00F0  149C               	bsf	28,1	;volsfr
+   795  00F1                     l1540:
+   796                           
+   797                           ;QC3-16F630-C.c: 229:         _delay((unsigned long)((50)*(20000000/4000.0)));
+   798  00F1  3002               	movlw	2
+   799  00F2  1283               	bcf	3,5	;RP0=0, select bank0
+   800  00F3  00B8               	movwf	??_main+2
+   801  00F4  3045               	movlw	69
+   802  00F5  00B7               	movwf	??_main+1
+   803  00F6  30A9               	movlw	169
+   804  00F7  00B6               	movwf	??_main
+   805  00F8                     u547:
+   806  00F8  0BB6               	decfsz	??_main,f
+   807  00F9  28F8               	goto	u547
+   808  00FA  0BB7               	decfsz	??_main+1,f
+   809  00FB  28F8               	goto	u547
+   810  00FC  0BB8               	decfsz	??_main+2,f
+   811  00FD  28F8               	goto	u547
+   812  00FE  28FF               	nop2
+   813  00FF                     l1542:
+   814                           
+   815                           ;QC3-16F630-C.c: 203:         while(PORTAbits.RA1 == 1){
+   816  00FF  1283               	bcf	3,5	;RP0=0, select bank0
+   817  0100  1885               	btfsc	5,1	;volatile
+   818  0101  2903               	goto	u501
+   819  0102  2904               	goto	u500
+   820  0103                     u501:
+   821  0103  28BC               	goto	l96
+   822  0104                     u500:
+   823  0104  28FF               	goto	l1542
+   824  0105  280F               	ljmp	start
+   825  0106                     __end_of_main:
+   826                           
+   827                           	psect	text1
+   828  0333                     __ptext1:	
+   829 ;; *************** function _volt9 *****************
+   830 ;; Defined at:
+   831 ;;		line 23 in file "QC3-16F630-C.c"
+   832 ;; Parameters:    Size  Location     Type
+   833 ;;		None
+   834 ;; Auto vars:     Size  Location     Type
+   835 ;;		None
+   836 ;; Return value:  Size  Location     Type
+   837 ;;                  1    wreg      void 
+   838 ;; Registers used:
+   839 ;;		wreg, status,2
+   840 ;; Tracked objects:
+   841 ;;		On entry : 0/0
+   842 ;;		On exit  : 0/0
+   843 ;;		Unchanged: 0/0
+   844 ;; Data sizes:     COMMON   BANK0
+   845 ;;      Params:         0       0
+   846 ;;      Locals:         0       0
+   847 ;;      Temps:          0       0
+   848 ;;      Totals:         0       0
+   849 ;;Total ram usage:        0 bytes
+   850 ;; Hardware stack levels used:    1
+   851 ;; Hardware stack levels required when called:    3
+   852 ;; This function calls:
+   853 ;;		Nothing
+   854 ;; This function is called by:
+   855 ;;		_main
+   856 ;; This function uses a non-reentrant model
+   857 ;;
+   858                           
+   859                           
+   860                           ;psect for function _volt9
+   861  0333                     _volt9:
+   862  0333                     l1166:	
+   863                           ;incstack = 0
+   864                           ; Regs used in _volt9: [wreg+status,2]
+   865                           
+   866                           
+   867                           ;QC3-16F630-C.c: 27:     TRISC = 0b00001000;
+   868  0333  3008               	movlw	8
+   869  0334  1683               	bsf	3,5	;RP0=1, select bank1
+   870  0335  0087               	movwf	7	;volatile
+   871                           
+   872                           ;QC3-16F630-C.c: 28:     PORTC = 0b00010010;
+   873  0336  3012               	movlw	18
+   874  0337  1283               	bcf	3,5	;RP0=0, select bank0
+   875  0338  0087               	movwf	7	;volatile
+   876  0339                     l1168:
+   877                           
+   878                           ;QC3-16F630-C.c: 30:     EEADR = 0x00;
+   879  0339  1683               	bsf	3,5	;RP0=1, select bank1
+   880  033A  019B               	clrf	27	;volatile
+   881  033B                     l1170:
+   882                           
+   883                           ;QC3-16F630-C.c: 31:     EEDATA = 0x45;
+   884  033B  3045               	movlw	69
+   885  033C  009A               	movwf	26	;volatile
+   886  033D                     l1172:
+   887                           
+   888                           ;QC3-16F630-C.c: 32:     EECON1bits.WREN = 1;
+   889  033D  151C               	bsf	28,2	;volsfr
+   890  033E                     l1174:
+   891                           
+   892                           ;QC3-16F630-C.c: 33:     EECON2 = 0x55;
+   893  033E  3055               	movlw	85
+   894  033F  009D               	movwf	29	;volsfr
+   895  0340                     l1176:
+   896                           
+   897                           ;QC3-16F630-C.c: 34:     EECON2 = 0xAA;
+   898  0340  30AA               	movlw	170
+   899  0341  009D               	movwf	29	;volsfr
+   900  0342                     l1178:
+   901                           
+   902                           ;QC3-16F630-C.c: 35:     EECON1bits.WR = 1;
+   903  0342  149C               	bsf	28,1	;volsfr
+   904  0343                     l48:
+   905  0343  0008               	return
+   906  0344                     __end_of_volt9:
+   907                           
+   908                           	psect	text2
+   909  0283                     __ptext2:	
+   910 ;; *************** function _volt5 *****************
+   911 ;; Defined at:
+   912 ;;		line 37 in file "QC3-16F630-C.c"
+   913 ;; Parameters:    Size  Location     Type
+   914 ;;		None
+   915 ;; Auto vars:     Size  Location     Type
+   916 ;;		None
+   917 ;; Return value:  Size  Location     Type
+   918 ;;                  1    wreg      void 
+   919 ;; Registers used:
+   920 ;;		wreg, status,2
+   921 ;; Tracked objects:
+   922 ;;		On entry : 0/0
+   923 ;;		On exit  : 0/0
+   924 ;;		Unchanged: 0/0
+   925 ;; Data sizes:     COMMON   BANK0
+   926 ;;      Params:         0       0
+   927 ;;      Locals:         0       0
+   928 ;;      Temps:          0       2
+   929 ;;      Totals:         0       2
+   930 ;;Total ram usage:        2 bytes
+   931 ;; Hardware stack levels used:    1
+   932 ;; Hardware stack levels required when called:    3
+   933 ;; This function calls:
+   934 ;;		Nothing
+   935 ;; This function is called by:
+   936 ;;		_main
+   937 ;; This function uses a non-reentrant model
+   938 ;;
+   939                           
+   940                           
+   941                           ;psect for function _volt5
+   942  0283                     _volt5:
+   943  0283                     l1180:	
+   944                           ;incstack = 0
+   945                           ; Regs used in _volt5: [wreg+status,2]
+   946                           
+   947                           
+   948                           ;QC3-16F630-C.c: 41:     TRISC = 0b00010000;
+   949  0283  3010               	movlw	16
+   950  0284  1683               	bsf	3,5	;RP0=1, select bank1
+   951  0285  0087               	movwf	7	;volatile
+   952                           
+   953                           ;QC3-16F630-C.c: 42:     PORTC = 0b00000001;
+   954  0286  3001               	movlw	1
+   955  0287  1283               	bcf	3,5	;RP0=0, select bank0
+   956  0288  0087               	movwf	7	;volatile
+   957  0289                     l1182:
+   958                           
+   959                           ;QC3-16F630-C.c: 43:     PORTAbits.RA1 = 0;
+   960  0289  1085               	bcf	5,1	;volatile
+   961  028A                     l1184:
+   962                           
+   963                           ;QC3-16F630-C.c: 45:     EEADR = 0x00;
+   964  028A  1683               	bsf	3,5	;RP0=1, select bank1
+   965  028B  019B               	clrf	27	;volatile
+   966  028C                     l1186:
+   967                           
+   968                           ;QC3-16F630-C.c: 46:     EEDATA = 0x25;
+   969  028C  3025               	movlw	37
+   970  028D  009A               	movwf	26	;volatile
+   971  028E                     l1188:
+   972                           
+   973                           ;QC3-16F630-C.c: 47:     EECON1bits.WREN = 1;
+   974  028E  151C               	bsf	28,2	;volsfr
+   975  028F                     l1190:
+   976                           
+   977                           ;QC3-16F630-C.c: 48:     EECON2 = 0x55;
+   978  028F  3055               	movlw	85
+   979  0290  009D               	movwf	29	;volsfr
+   980  0291                     l1192:
+   981                           
+   982                           ;QC3-16F630-C.c: 49:     EECON2 = 0xAA;
+   983  0291  30AA               	movlw	170
+   984  0292  009D               	movwf	29	;volsfr
+   985  0293                     l1194:
+   986                           
+   987                           ;QC3-16F630-C.c: 50:     EECON1bits.WR = 1;
+   988  0293  149C               	bsf	28,1	;volsfr
+   989  0294                     l1196:
+   990                           
+   991                           ;QC3-16F630-C.c: 52:     _delay((unsigned long)((20)*(20000000/4000.0)));
+   992  0294  3082               	movlw	130
+   993  0295  1283               	bcf	3,5	;RP0=0, select bank0
+   994  0296  00AE               	movwf	??_volt5+1
+   995  0297  30DD               	movlw	221
+   996  0298  00AD               	movwf	??_volt5
+   997  0299                     u557:
+   998  0299  0BAD               	decfsz	??_volt5,f
+   999  029A  2A99               	goto	u557
+  1000  029B  0BAE               	decfsz	??_volt5+1,f
+  1001  029C  2A99               	goto	u557
+  1002  029D  2A9E               	nop2
+  1003  029E                     l1198:
+  1004                           
+  1005                           ;QC3-16F630-C.c: 53:     EEADR = 0x01;
+  1006  029E  3001               	movlw	1
+  1007  029F  1683               	bsf	3,5	;RP0=1, select bank1
+  1008  02A0  009B               	movwf	27	;volatile
+  1009                           
+  1010                           ;QC3-16F630-C.c: 54:     EEDATA = 0x00;
+  1011  02A1  019A               	clrf	26	;volatile
+  1012  02A2                     l1200:
+  1013                           
+  1014                           ;QC3-16F630-C.c: 55:     EECON1bits.WREN = 1;
+  1015  02A2  151C               	bsf	28,2	;volsfr
+  1016  02A3                     l1202:
+  1017                           
+  1018                           ;QC3-16F630-C.c: 56:     EECON2 = 0x55;
+  1019  02A3  3055               	movlw	85
+  1020  02A4  009D               	movwf	29	;volsfr
+  1021  02A5                     l1204:
+  1022                           
+  1023                           ;QC3-16F630-C.c: 57:     EECON2 = 0xAA;
+  1024  02A5  30AA               	movlw	170
+  1025  02A6  009D               	movwf	29	;volsfr
+  1026  02A7                     l1206:
+  1027                           
+  1028                           ;QC3-16F630-C.c: 58:     EECON1bits.WR = 1;
+  1029  02A7  149C               	bsf	28,1	;volsfr
+  1030  02A8                     l51:
+  1031  02A8  0008               	return
+  1032  02A9                     __end_of_volt5:
+  1033                           
+  1034                           	psect	text3
+  1035  0344                     __ptext3:	
+  1036 ;; *************** function _volt12 *****************
+  1037 ;; Defined at:
+  1038 ;;		line 10 in file "QC3-16F630-C.c"
+  1039 ;; Parameters:    Size  Location     Type
+  1040 ;;		None
+  1041 ;; Auto vars:     Size  Location     Type
+  1042 ;;		None
+  1043 ;; Return value:  Size  Location     Type
+  1044 ;;                  1    wreg      void 
+  1045 ;; Registers used:
+  1046 ;;		wreg, status,2
+  1047 ;; Tracked objects:
+  1048 ;;		On entry : 0/0
+  1049 ;;		On exit  : 0/0
+  1050 ;;		Unchanged: 0/0
+  1051 ;; Data sizes:     COMMON   BANK0
+  1052 ;;      Params:         0       0
+  1053 ;;      Locals:         0       0
+  1054 ;;      Temps:          0       0
+  1055 ;;      Totals:         0       0
+  1056 ;;Total ram usage:        0 bytes
+  1057 ;; Hardware stack levels used:    1
+  1058 ;; Hardware stack levels required when called:    3
+  1059 ;; This function calls:
+  1060 ;;		Nothing
+  1061 ;; This function is called by:
+  1062 ;;		_main
+  1063 ;; This function uses a non-reentrant model
+  1064 ;;
+  1065                           
+  1066                           
+  1067                           ;psect for function _volt12
+  1068  0344                     _volt12:
+  1069  0344                     l1152:	
+  1070                           ;incstack = 0
+  1071                           ; Regs used in _volt12: [wreg+status,2]
+  1072                           
+  1073                           
+  1074                           ;QC3-16F630-C.c: 13:     TRISC = 0b00011000;
+  1075  0344  3018               	movlw	24
+  1076  0345  1683               	bsf	3,5	;RP0=1, select bank1
+  1077  0346  0087               	movwf	7	;volatile
+  1078                           
+  1079                           ;QC3-16F630-C.c: 14:     PORTC = 0b00000100;
+  1080  0347  3004               	movlw	4
+  1081  0348  1283               	bcf	3,5	;RP0=0, select bank0
+  1082  0349  0087               	movwf	7	;volatile
+  1083  034A                     l1154:
+  1084                           
+  1085                           ;QC3-16F630-C.c: 16:     EEADR = 0x00;
+  1086  034A  1683               	bsf	3,5	;RP0=1, select bank1
+  1087  034B  019B               	clrf	27	;volatile
+  1088  034C                     l1156:
+  1089                           
+  1090                           ;QC3-16F630-C.c: 17:     EEDATA = 0x60;
+  1091  034C  3060               	movlw	96
+  1092  034D  009A               	movwf	26	;volatile
+  1093  034E                     l1158:
+  1094                           
+  1095                           ;QC3-16F630-C.c: 18:     EECON1bits.WREN = 1;
+  1096  034E  151C               	bsf	28,2	;volsfr
+  1097  034F                     l1160:
+  1098                           
+  1099                           ;QC3-16F630-C.c: 19:     EECON2 = 0x55;
+  1100  034F  3055               	movlw	85
+  1101  0350  009D               	movwf	29	;volsfr
+  1102  0351                     l1162:
+  1103                           
+  1104                           ;QC3-16F630-C.c: 20:     EECON2 = 0xAA;
+  1105  0351  30AA               	movlw	170
+  1106  0352  009D               	movwf	29	;volsfr
+  1107  0353                     l1164:
+  1108                           
+  1109                           ;QC3-16F630-C.c: 21:     EECON1bits.WR = 1;
+  1110  0353  149C               	bsf	28,1	;volsfr
+  1111  0354                     l45:
+  1112  0354  0008               	return
+  1113  0355                     __end_of_volt12:
+  1114                           
+  1115                           	psect	text4
+  1116  0106                     __ptext4:	
+  1117 ;; *************** function _continuous *****************
+  1118 ;; Defined at:
+  1119 ;;		line 75 in file "QC3-16F630-C.c"
+  1120 ;; Parameters:    Size  Location     Type
+  1121 ;;		None
+  1122 ;; Auto vars:     Size  Location     Type
+  1123 ;;  i               2   20[BANK0 ] int 
+  1124 ;;  i               2   18[BANK0 ] int 
+  1125 ;; Return value:  Size  Location     Type
+  1126 ;;                  1    wreg      void 
+  1127 ;; Registers used:
+  1128 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  1129 ;; Tracked objects:
+  1130 ;;		On entry : 0/0
+  1131 ;;		On exit  : 0/0
+  1132 ;;		Unchanged: 0/0
+  1133 ;; Data sizes:     COMMON   BANK0
+  1134 ;;      Params:         0       0
+  1135 ;;      Locals:         0       4
+  1136 ;;      Temps:          0       3
+  1137 ;;      Totals:         0       7
+  1138 ;;Total ram usage:        7 bytes
+  1139 ;; Hardware stack levels used:    1
+  1140 ;; Hardware stack levels required when called:    4
+  1141 ;; This function calls:
+  1142 ;;		_dec200mv
+  1143 ;;		_inc200mv
+  1144 ;; This function is called by:
+  1145 ;;		_main
+  1146 ;; This function uses a non-reentrant model
+  1147 ;;
+  1148                           
+  1149                           
+  1150                           ;psect for function _continuous
+  1151  0106                     _continuous:
+  1152  0106                     l1208:	
+  1153                           ;incstack = 0
+  1154                           ; Regs used in _continuous: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  1155                           
+  1156                           
+  1157                           ;QC3-16F630-C.c: 79:     TRISC = 0b00010000;
+  1158  0106  3010               	movlw	16
+  1159  0107  1683               	bsf	3,5	;RP0=1, select bank1
+  1160  0108  0087               	movwf	7	;volatile
+  1161                           
+  1162                           ;QC3-16F630-C.c: 80:     PORTC = 0b00001000;
+  1163  0109  3008               	movlw	8
+  1164  010A  1283               	bcf	3,5	;RP0=0, select bank0
+  1165  010B  0087               	movwf	7	;volatile
+  1166  010C                     l1210:
+  1167                           
+  1168                           ;QC3-16F630-C.c: 81:     PORTAbits.RA1 = 1;
+  1169  010C  1485               	bsf	5,1	;volatile
+  1170  010D                     l1212:
+  1171                           
+  1172                           ;QC3-16F630-C.c: 83:     if(changed == 0){
+  1173  010D  083B               	movf	_changed,w
+  1174  010E  043C               	iorwf	_changed+1,w
+  1175  010F  1D03               	btfss	3,2
+  1176  0110  2912               	goto	u261
+  1177  0111  2913               	goto	u260
+  1178  0112                     u261:
+  1179  0112  2932               	goto	l1232
+  1180  0113                     u260:
+  1181  0113                     l1214:
+  1182                           
+  1183                           ;QC3-16F630-C.c: 85:         EEADR = 0x01;
+  1184  0113  3001               	movlw	1
+  1185  0114  1683               	bsf	3,5	;RP0=1, select bank1
+  1186  0115  009B               	movwf	27	;volatile
+  1187                           
+  1188                           ;QC3-16F630-C.c: 86:         EEDATA = 0x01;
+  1189  0116  3001               	movlw	1
+  1190  0117  009A               	movwf	26	;volatile
+  1191  0118                     l1216:
+  1192                           
+  1193                           ;QC3-16F630-C.c: 87:         EECON1bits.WREN = 1;
+  1194  0118  151C               	bsf	28,2	;volsfr
+  1195                           
+  1196                           ;QC3-16F630-C.c: 88:         EECON2 = 0x55;
+  1197  0119  3055               	movlw	85
+  1198  011A  009D               	movwf	29	;volsfr
+  1199                           
+  1200                           ;QC3-16F630-C.c: 89:         EECON2 = 0xAA;
+  1201  011B  30AA               	movlw	170
+  1202  011C  009D               	movwf	29	;volsfr
+  1203  011D                     l1218:
+  1204                           
+  1205                           ;QC3-16F630-C.c: 90:         EECON1bits.WR = 1;
+  1206  011D  149C               	bsf	28,1	;volsfr
+  1207                           
+  1208                           ;QC3-16F630-C.c: 92:         _delay((unsigned long)((20)*(20000000/4000.0)));
+  1209  011E  3082               	movlw	130
+  1210  011F  1283               	bcf	3,5	;RP0=0, select bank0
+  1211  0120  00B0               	movwf	??_continuous+1
+  1212  0121  30DD               	movlw	221
+  1213  0122  00AF               	movwf	??_continuous
+  1214  0123                     u567:
+  1215  0123  0BAF               	decfsz	??_continuous,f
+  1216  0124  2923               	goto	u567
+  1217  0125  0BB0               	decfsz	??_continuous+1,f
+  1218  0126  2923               	goto	u567
+  1219  0127  2928               	nop2
+  1220  0128                     l1220:
+  1221                           
+  1222                           ;QC3-16F630-C.c: 93:         EEADR = 0x00;
+  1223  0128  1683               	bsf	3,5	;RP0=1, select bank1
+  1224  0129  019B               	clrf	27	;volatile
+  1225  012A                     l1222:
+  1226                           
+  1227                           ;QC3-16F630-C.c: 94:         EEDATA = 0x25;
+  1228  012A  3025               	movlw	37
+  1229  012B  009A               	movwf	26	;volatile
+  1230  012C                     l1224:
+  1231                           
+  1232                           ;QC3-16F630-C.c: 95:         EECON1bits.WREN = 1;
+  1233  012C  151C               	bsf	28,2	;volsfr
+  1234  012D                     l1226:
+  1235                           
+  1236                           ;QC3-16F630-C.c: 96:         EECON2 = 0x55;
+  1237  012D  3055               	movlw	85
+  1238  012E  009D               	movwf	29	;volsfr
+  1239  012F                     l1228:
+  1240                           
+  1241                           ;QC3-16F630-C.c: 97:         EECON2 = 0xAA;
+  1242  012F  30AA               	movlw	170
+  1243  0130  009D               	movwf	29	;volsfr
+  1244  0131                     l1230:
+  1245                           
+  1246                           ;QC3-16F630-C.c: 98:         EECON1bits.WR = 1;
+  1247  0131  149C               	bsf	28,1	;volsfr
+  1248  0132                     l1232:
+  1249                           
+  1250                           ;QC3-16F630-C.c: 100:     if(changed == 1){
+  1251  0132  1283               	bcf	3,5	;RP0=0, select bank0
+  1252  0133  033B               	decf	_changed,w
+  1253  0134  043C               	iorwf	_changed+1,w
+  1254  0135  1D03               	btfss	3,2
+  1255  0136  2938               	goto	u271
+  1256  0137  2939               	goto	u270
+  1257  0138                     u271:
+  1258  0138  29A7               	goto	l70
+  1259  0139                     u270:
+  1260  0139                     l1234:
+  1261                           
+  1262                           ;QC3-16F630-C.c: 102:         EEADR = 0x01;
+  1263  0139  3001               	movlw	1
+  1264  013A  1683               	bsf	3,5	;RP0=1, select bank1
+  1265  013B  009B               	movwf	27	;volatile
+  1266                           
+  1267                           ;QC3-16F630-C.c: 103:         EEDATA = 0x01;
+  1268  013C  3001               	movlw	1
+  1269  013D  009A               	movwf	26	;volatile
+  1270  013E                     l1236:
+  1271                           
+  1272                           ;QC3-16F630-C.c: 104:         EECON1bits.WREN = 1;
+  1273  013E  151C               	bsf	28,2	;volsfr
+  1274                           
+  1275                           ;QC3-16F630-C.c: 105:         EECON2 = 0x55;
+  1276  013F  3055               	movlw	85
+  1277  0140  009D               	movwf	29	;volsfr
+  1278                           
+  1279                           ;QC3-16F630-C.c: 106:         EECON2 = 0xAA;
+  1280  0141  30AA               	movlw	170
+  1281  0142  009D               	movwf	29	;volsfr
+  1282  0143                     l1238:
+  1283                           
+  1284                           ;QC3-16F630-C.c: 107:         EECON1bits.WR = 1;
+  1285  0143  149C               	bsf	28,1	;volsfr
+  1286                           
+  1287                           ;QC3-16F630-C.c: 109:         _delay((unsigned long)((20)*(20000000/4000.0)));
+  1288  0144  3082               	movlw	130
+  1289  0145  1283               	bcf	3,5	;RP0=0, select bank0
+  1290  0146  00B0               	movwf	??_continuous+1
+  1291  0147  30DD               	movlw	221
+  1292  0148  00AF               	movwf	??_continuous
+  1293  0149                     u577:
+  1294  0149  0BAF               	decfsz	??_continuous,f
+  1295  014A  2949               	goto	u577
+  1296  014B  0BB0               	decfsz	??_continuous+1,f
+  1297  014C  2949               	goto	u577
+  1298  014D  294E               	nop2
+  1299  014E                     l1240:
+  1300                           
+  1301                           ;QC3-16F630-C.c: 110:         EEADR = 0x00;
+  1302  014E  1683               	bsf	3,5	;RP0=1, select bank1
+  1303  014F  019B               	clrf	27	;volatile
+  1304  0150                     l1242:
+  1305                           
+  1306                           ;QC3-16F630-C.c: 111:         EECON1bits.RD = 1;
+  1307  0150  141C               	bsf	28,0	;volsfr
+  1308  0151                     l1244:
+  1309                           
+  1310                           ;QC3-16F630-C.c: 112:         eep1 = EEDATA;
+  1311  0151  081A               	movf	26,w	;volatile
+  1312  0152  00DF               	movwf	btemp+1
+  1313  0153  085F               	movf	btemp+1,w
+  1314  0154  1283               	bcf	3,5	;RP0=0, select bank0
+  1315  0155  00BE               	movwf	_eep1
+  1316  0156                     l1246:
+  1317                           
+  1318                           ;QC3-16F630-C.c: 113:         if(eep1 > 0x25){
+  1319  0156  3026               	movlw	38
+  1320  0157  023E               	subwf	_eep1,w
+  1321  0158  1C03               	skipc
+  1322  0159  295B               	goto	u281
+  1323  015A  295C               	goto	u280
+  1324  015B                     u281:
+  1325  015B  297E               	goto	l1256
+  1326  015C                     u280:
+  1327  015C                     l1248:
+  1328                           
+  1329                           ;QC3-16F630-C.c: 114:             for(int i = 0x01; i<= eep1-0x25 ;i++ ){
+  1330  015C  3001               	movlw	1
+  1331  015D  00B2               	movwf	continuous@i
+  1332  015E  3000               	movlw	0
+  1333  015F  00B3               	movwf	continuous@i+1
+  1334  0160  2969               	goto	l1254
+  1335  0161                     l1250:
+  1336                           
+  1337                           ;QC3-16F630-C.c: 115:                 inc200mv();
+  1338  0161  22CF               	fcall	_inc200mv
+  1339  0162                     l1252:
+  1340                           
+  1341                           ;QC3-16F630-C.c: 116:             }
+  1342  0162  3001               	movlw	1
+  1343  0163  1283               	bcf	3,5	;RP0=0, select bank0
+  1344  0164  07B2               	addwf	continuous@i,f
+  1345  0165  1803               	skipnc
+  1346  0166  0AB3               	incf	continuous@i+1,f
+  1347  0167  3000               	movlw	0
+  1348  0168  07B3               	addwf	continuous@i+1,f
+  1349  0169                     l1254:
+  1350  0169  083E               	movf	_eep1,w
+  1351  016A  3EDB               	addlw	219
+  1352  016B  00AF               	movwf	??_continuous
+  1353  016C  30FF               	movlw	255
+  1354  016D  1803               	skipnc
+  1355  016E  3000               	movlw	0
+  1356  016F  00B0               	movwf	??_continuous+1
+  1357  0170  0830               	movf	??_continuous+1,w
+  1358  0171  3A80               	xorlw	128
+  1359  0172  00B1               	movwf	??_continuous+2
+  1360  0173  0833               	movf	continuous@i+1,w
+  1361  0174  3A80               	xorlw	128
+  1362  0175  0231               	subwf	??_continuous+2,w
+  1363  0176  1D03               	skipz
+  1364  0177  297A               	goto	u295
+  1365  0178  0832               	movf	continuous@i,w
+  1366  0179  022F               	subwf	??_continuous,w
+  1367  017A                     u295:
+  1368  017A  1803               	skipnc
+  1369  017B  297D               	goto	u291
+  1370  017C  297E               	goto	u290
+  1371  017D                     u291:
+  1372  017D  2961               	goto	l1250
+  1373  017E                     u290:
+  1374  017E                     l1256:
+  1375                           
+  1376                           ;QC3-16F630-C.c: 118:         if(eep1 < 0x25){
+  1377  017E  3025               	movlw	37
+  1378  017F  1283               	bcf	3,5	;RP0=0, select bank0
+  1379  0180  023E               	subwf	_eep1,w
+  1380  0181  1803               	skipnc
+  1381  0182  2984               	goto	u301
+  1382  0183  2985               	goto	u300
+  1383  0184                     u301:
+  1384  0184  29A7               	goto	l70
+  1385  0185                     u300:
+  1386  0185                     l1258:
+  1387                           
+  1388                           ;QC3-16F630-C.c: 119:             for(int i = 0x01; i <= 0x25 - eep1; i++){
+  1389  0185  3001               	movlw	1
+  1390  0186  00B4               	movwf	continuous@i_185
+  1391  0187  3000               	movlw	0
+  1392  0188  00B5               	movwf	continuous@i_185+1
+  1393  0189  2992               	goto	l1264
+  1394  018A                     l1260:
+  1395                           
+  1396                           ;QC3-16F630-C.c: 120:                 dec200mv();
+  1397  018A  22E8               	fcall	_dec200mv
+  1398  018B                     l1262:
+  1399                           
+  1400                           ;QC3-16F630-C.c: 121:             }
+  1401  018B  3001               	movlw	1
+  1402  018C  1283               	bcf	3,5	;RP0=0, select bank0
+  1403  018D  07B4               	addwf	continuous@i_185,f
+  1404  018E  1803               	skipnc
+  1405  018F  0AB5               	incf	continuous@i_185+1,f
+  1406  0190  3000               	movlw	0
+  1407  0191  07B5               	addwf	continuous@i_185+1,f
+  1408  0192                     l1264:
+  1409  0192  3000               	movlw	0
+  1410  0193  00B0               	movwf	??_continuous+1
+  1411  0194  083E               	movf	_eep1,w
+  1412  0195  3C25               	sublw	37
+  1413  0196  00AF               	movwf	??_continuous
+  1414  0197  1C03               	skipc
+  1415  0198  03B0               	decf	??_continuous+1,f
+  1416  0199  0830               	movf	??_continuous+1,w
+  1417  019A  3A80               	xorlw	128
+  1418  019B  00B1               	movwf	??_continuous+2
+  1419  019C  0835               	movf	continuous@i_185+1,w
+  1420  019D  3A80               	xorlw	128
+  1421  019E  0231               	subwf	??_continuous+2,w
+  1422  019F  1D03               	skipz
+  1423  01A0  29A3               	goto	u315
+  1424  01A1  0834               	movf	continuous@i_185,w
+  1425  01A2  022F               	subwf	??_continuous,w
+  1426  01A3                     u315:
+  1427  01A3  1803               	skipnc
+  1428  01A4  29A6               	goto	u311
+  1429  01A5  29A7               	goto	u310
+  1430  01A6                     u311:
+  1431  01A6  298A               	goto	l1260
+  1432  01A7                     u310:
+  1433  01A7                     l70:
+  1434  01A7  0008               	return
+  1435  01A8                     __end_of_continuous:
+  1436                           
+  1437                           	psect	text5
+  1438  02CF                     __ptext5:	
+  1439 ;; *************** function _inc200mv *****************
+  1440 ;; Defined at:
+  1441 ;;		line 60 in file "QC3-16F630-C.c"
+  1442 ;; Parameters:    Size  Location     Type
+  1443 ;;		None
+  1444 ;; Auto vars:     Size  Location     Type
+  1445 ;;		None
+  1446 ;; Return value:  Size  Location     Type
+  1447 ;;                  1    wreg      void 
+  1448 ;; Registers used:
+  1449 ;;		wreg
+  1450 ;; Tracked objects:
+  1451 ;;		On entry : 0/0
+  1452 ;;		On exit  : 0/0
+  1453 ;;		Unchanged: 0/0
+  1454 ;; Data sizes:     COMMON   BANK0
+  1455 ;;      Params:         0       0
+  1456 ;;      Locals:         0       0
+  1457 ;;      Temps:          0       2
+  1458 ;;      Totals:         0       2
+  1459 ;;Total ram usage:        2 bytes
+  1460 ;; Hardware stack levels used:    1
+  1461 ;; Hardware stack levels required when called:    3
+  1462 ;; This function calls:
+  1463 ;;		Nothing
+  1464 ;; This function is called by:
+  1465 ;;		_continuous
+  1466 ;;		_main
+  1467 ;; This function uses a non-reentrant model
+  1468 ;;
+  1469                           
+  1470                           
+  1471                           ;psect for function _inc200mv
+  1472  02CF                     _inc200mv:
+  1473  02CF                     l1128:	
+  1474                           ;incstack = 0
+  1475                           ; Regs used in _inc200mv: [wreg]
+  1476                           
+  1477                           
+  1478                           ;QC3-16F630-C.c: 61:         TRISCbits.TRISC4 = 0x00;
+  1479  02CF  1683               	bsf	3,5	;RP0=1, select bank1
+  1480  02D0  1207               	bcf	7,4	;volatile
+  1481                           
+  1482                           ;QC3-16F630-C.c: 62:         PORTCbits.RC4 = 1;
+  1483  02D1  1283               	bcf	3,5	;RP0=0, select bank0
+  1484  02D2  1607               	bsf	7,4	;volatile
+  1485  02D3                     l1130:
+  1486                           
+  1487                           ;QC3-16F630-C.c: 63:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  1488  02D3  3041               	movlw	65
+  1489  02D4  00AE               	movwf	??_inc200mv+1
+  1490  02D5  30EE               	movlw	238
+  1491  02D6  00AD               	movwf	??_inc200mv
+  1492  02D7                     u587:
+  1493  02D7  0BAD               	decfsz	??_inc200mv,f
+  1494  02D8  2AD7               	goto	u587
+  1495  02D9  0BAE               	decfsz	??_inc200mv+1,f
+  1496  02DA  2AD7               	goto	u587
+  1497  02DB  0000               	nop
+  1498  02DC                     l1132:
+  1499                           
+  1500                           ;QC3-16F630-C.c: 64:         PORTCbits.RC4 = 0;
+  1501  02DC  1283               	bcf	3,5	;RP0=0, select bank0
+  1502  02DD  1207               	bcf	7,4	;volatile
+  1503                           
+  1504                           ;QC3-16F630-C.c: 66:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  1505  02DE  3041               	movlw	65
+  1506  02DF  00AE               	movwf	??_inc200mv+1
+  1507  02E0  30EE               	movlw	238
+  1508  02E1  00AD               	movwf	??_inc200mv
+  1509  02E2                     u597:
+  1510  02E2  0BAD               	decfsz	??_inc200mv,f
+  1511  02E3  2AE2               	goto	u597
+  1512  02E4  0BAE               	decfsz	??_inc200mv+1,f
+  1513  02E5  2AE2               	goto	u597
+  1514  02E6  0000               	nop
+  1515  02E7                     l54:
+  1516  02E7  0008               	return
+  1517  02E8                     __end_of_inc200mv:
+  1518                           
+  1519                           	psect	text6
+  1520  02E8                     __ptext6:	
+  1521 ;; *************** function _dec200mv *****************
+  1522 ;; Defined at:
+  1523 ;;		line 68 in file "QC3-16F630-C.c"
+  1524 ;; Parameters:    Size  Location     Type
+  1525 ;;		None
+  1526 ;; Auto vars:     Size  Location     Type
+  1527 ;;		None
+  1528 ;; Return value:  Size  Location     Type
+  1529 ;;                  1    wreg      void 
+  1530 ;; Registers used:
+  1531 ;;		wreg
+  1532 ;; Tracked objects:
+  1533 ;;		On entry : 0/0
+  1534 ;;		On exit  : 0/0
+  1535 ;;		Unchanged: 0/0
+  1536 ;; Data sizes:     COMMON   BANK0
+  1537 ;;      Params:         0       0
+  1538 ;;      Locals:         0       0
+  1539 ;;      Temps:          0       2
+  1540 ;;      Totals:         0       2
+  1541 ;;Total ram usage:        2 bytes
+  1542 ;; Hardware stack levels used:    1
+  1543 ;; Hardware stack levels required when called:    3
+  1544 ;; This function calls:
+  1545 ;;		Nothing
+  1546 ;; This function is called by:
+  1547 ;;		_continuous
+  1548 ;;		_main
+  1549 ;; This function uses a non-reentrant model
+  1550 ;;
+  1551                           
+  1552                           
+  1553                           ;psect for function _dec200mv
+  1554  02E8                     _dec200mv:
+  1555  02E8                     l1134:	
+  1556                           ;incstack = 0
+  1557                           ; Regs used in _dec200mv: [wreg]
+  1558                           
+  1559                           
+  1560                           ;QC3-16F630-C.c: 69:         TRISCbits.TRISC3 = 0x00;
+  1561  02E8  1683               	bsf	3,5	;RP0=1, select bank1
+  1562  02E9  1187               	bcf	7,3	;volatile
+  1563                           
+  1564                           ;QC3-16F630-C.c: 70:         PORTCbits.RC3 = 0;
+  1565  02EA  1283               	bcf	3,5	;RP0=0, select bank0
+  1566  02EB  1187               	bcf	7,3	;volatile
+  1567  02EC                     l1136:
+  1568                           
+  1569                           ;QC3-16F630-C.c: 71:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  1570  02EC  3041               	movlw	65
+  1571  02ED  00AE               	movwf	??_dec200mv+1
+  1572  02EE  30EE               	movlw	238
+  1573  02EF  00AD               	movwf	??_dec200mv
+  1574  02F0                     u607:
+  1575  02F0  0BAD               	decfsz	??_dec200mv,f
+  1576  02F1  2AF0               	goto	u607
+  1577  02F2  0BAE               	decfsz	??_dec200mv+1,f
+  1578  02F3  2AF0               	goto	u607
+  1579  02F4  0000               	nop
+  1580  02F5                     l1138:
+  1581                           
+  1582                           ;QC3-16F630-C.c: 72:         PORTCbits.RC3 = 1;
+  1583  02F5  1283               	bcf	3,5	;RP0=0, select bank0
+  1584  02F6  1587               	bsf	7,3	;volatile
+  1585                           
+  1586                           ;QC3-16F630-C.c: 73:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  1587  02F7  3041               	movlw	65
+  1588  02F8  00AE               	movwf	??_dec200mv+1
+  1589  02F9  30EE               	movlw	238
+  1590  02FA  00AD               	movwf	??_dec200mv
+  1591  02FB                     u617:
+  1592  02FB  0BAD               	decfsz	??_dec200mv,f
+  1593  02FC  2AFB               	goto	u617
+  1594  02FD  0BAE               	decfsz	??_dec200mv+1,f
+  1595  02FE  2AFB               	goto	u617
+  1596  02FF  0000               	nop
+  1597  0300                     l57:
+  1598  0300  0008               	return
+  1599  0301                     __end_of_dec200mv:
+  1600                           
+  1601                           	psect	text7
+  1602  024A                     __ptext7:	
+  1603 ;; *************** function _ISR *****************
+  1604 ;; Defined at:
+  1605 ;;		line 125 in file "QC3-16F630-C.c"
+  1606 ;; Parameters:    Size  Location     Type
+  1607 ;;		None
+  1608 ;; Auto vars:     Size  Location     Type
+  1609 ;;		None
+  1610 ;; Return value:  Size  Location     Type
+  1611 ;;                  1    wreg      void 
+  1612 ;; Registers used:
+  1613 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+  1614 ;; Tracked objects:
+  1615 ;;		On entry : 0/0
+  1616 ;;		On exit  : 0/0
+  1617 ;;		Unchanged: 0/0
+  1618 ;; Data sizes:     COMMON   BANK0
+  1619 ;;      Params:         0       0
+  1620 ;;      Locals:         0       0
+  1621 ;;      Temps:          0       4
+  1622 ;;      Totals:         0       4
+  1623 ;;Total ram usage:        4 bytes
+  1624 ;; Hardware stack levels used:    1
+  1625 ;; Hardware stack levels required when called:    2
+  1626 ;; This function calls:
+  1627 ;;		i1_continuous
+  1628 ;;		i1_volt12
+  1629 ;;		i1_volt5
+  1630 ;;		i1_volt9
+  1631 ;; This function is called by:
+  1632 ;;		Interrupt level 1
+  1633 ;; This function uses a non-reentrant model
+  1634 ;;
+  1635                           
+  1636                           
+  1637                           ;psect for function _ISR
+  1638  024A                     _ISR:
+  1639  024A                     i1l1380:
+  1640                           
+  1641                           ;QC3-16F630-C.c: 126:     if(INTCONbits.INTF == 1){
+  1642  024A  1C8B               	btfss	11,1	;volatile
+  1643  024B  2A4D               	goto	u38_21
+  1644  024C  2A4E               	goto	u38_20
+  1645  024D                     u38_21:
+  1646  024D  2A77               	goto	i1l83
+  1647  024E                     u38_20:
+  1648  024E                     i1l1382:
+  1649                           
+  1650                           ;QC3-16F630-C.c: 127:         dem1++;
+  1651  024E  3001               	movlw	1
+  1652  024F  07C1               	addwf	_dem1,f
+  1653  0250  1803               	skipnc
+  1654  0251  0AC2               	incf	_dem1+1,f
+  1655  0252  3000               	movlw	0
+  1656  0253  07C2               	addwf	_dem1+1,f
+  1657                           
+  1658                           ;QC3-16F630-C.c: 128:         switch(dem1){
+  1659  0254  2A60               	goto	i1l1398
+  1660  0255                     i1l1384:
+  1661  0255  22A9               	fcall	i1_volt5
+  1662  0256  2A76               	goto	i1l78
+  1663  0257                     i1l1386:
+  1664  0257  21A8               	fcall	i1_continuous
+  1665  0258  2A76               	goto	i1l78
+  1666  0259                     i1l1390:
+  1667  0259  2355               	fcall	i1_volt9
+  1668  025A  2A76               	goto	i1l78
+  1669  025B                     i1l1392:
+  1670  025B  2366               	fcall	i1_volt12
+  1671  025C                     i1l1394:
+  1672  025C  1283               	bcf	3,5	;RP0=0, select bank0
+  1673  025D  01C1               	clrf	_dem1
+  1674  025E  01C2               	clrf	_dem1+1
+  1675  025F  2A76               	goto	i1l78
+  1676  0260                     i1l1398:
+  1677                           
+  1678                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+      +                          itches
+  1679                           ; Switch size 1, requested type "simple"
+  1680                           ; Number of cases is 1, Range of values is 0 to 0
+  1681                           ; switch strategies available:
+  1682                           ; Name         Instructions Cycles
+  1683                           ; simple_byte            4     3 (average)
+  1684                           ; direct_byte            7     6 (fixed)
+  1685                           ; jumptable            260     6 (fixed)
+  1686                           ;	Chosen strategy is simple_byte
+  1687  0260  0842               	movf	_dem1+1,w
+  1688  0261  3A00               	xorlw	0	; case 0
+  1689  0262  1903               	skipnz
+  1690  0263  2A65               	goto	i1l1574
+  1691  0264  2A76               	goto	i1l78
+  1692  0265                     i1l1574:
+  1693                           
+  1694                           ; Switch size 1, requested type "simple"
+  1695                           ; Number of cases is 5, Range of values is 1 to 5
+  1696                           ; switch strategies available:
+  1697                           ; Name         Instructions Cycles
+  1698                           ; direct_byte           14     9 (fixed)
+  1699                           ; simple_byte           16     9 (average)
+  1700                           ; jumptable            263     9 (fixed)
+  1701                           ;	Chosen strategy is simple_byte
+  1702  0265  0841               	movf	_dem1,w
+  1703  0266  3A01               	xorlw	1	; case 1
+  1704  0267  1903               	skipnz
+  1705  0268  2A55               	goto	i1l1384
+  1706  0269  3A03               	xorlw	3	; case 2
+  1707  026A  1903               	skipnz
+  1708  026B  2A57               	goto	i1l1386
+  1709  026C  3A01               	xorlw	1	; case 3
+  1710  026D  1903               	skipnz
+  1711  026E  2A55               	goto	i1l1384
+  1712  026F  3A07               	xorlw	7	; case 4
+  1713  0270  1903               	skipnz
+  1714  0271  2A59               	goto	i1l1390
+  1715  0272  3A01               	xorlw	1	; case 5
+  1716  0273  1903               	skipnz
+  1717  0274  2A5B               	goto	i1l1392
+  1718  0275  2A76               	goto	i1l78
+  1719  0276                     i1l78:
+  1720                           
+  1721                           ;QC3-16F630-C.c: 135:         INTCONbits.INTF = 0;
+  1722  0276  108B               	bcf	11,1	;volatile
+  1723  0277                     i1l83:
+  1724  0277  1283               	bcf	3,5	;RP0=0, select bank0
+  1725  0278  082C               	movf	??_ISR+3,w
+  1726  0279  00DF               	movwf	btemp+1
+  1727  027A  082B               	movf	??_ISR+2,w
+  1728  027B  008A               	movwf	10
+  1729  027C  082A               	movf	??_ISR+1,w
+  1730  027D  0084               	movwf	4
+  1731  027E  0E29               	swapf	??_ISR^0,w
+  1732  027F  0083               	movwf	3
+  1733  0280  0EDE               	swapf	btemp,f
+  1734  0281  0E5E               	swapf	btemp,w
+  1735  0282  0009               	retfie
+  1736  0283                     __end_of_ISR:
+  1737                           
+  1738                           	psect	intentry
+  1739  0004                     __pintentry:	
+  1740                           ;incstack = 0
+  1741                           ; Regs used in _ISR: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+  1742                           
+  1743  0004                     interrupt_function:
+  1744  005E                     saved_w	set	btemp
+  1745  0004  00DE               	movwf	btemp
+  1746  0005  0E03               	swapf	3,w
+  1747  0006  1283               	bcf	3,5	;RP0=0, select bank0
+  1748  0007  00A9               	movwf	??_ISR
+  1749  0008  0804               	movf	4,w
+  1750  0009  00AA               	movwf	??_ISR+1
+  1751  000A  080A               	movf	10,w
+  1752  000B  00AB               	movwf	??_ISR+2
+  1753  000C  085F               	movf	btemp+1,w
+  1754  000D  00AC               	movwf	??_ISR+3
+  1755  000E  2A4A               	ljmp	_ISR
+  1756                           
+  1757                           	psect	text8
+  1758  0355                     __ptext8:	
+  1759 ;; *************** function i1_volt9 *****************
+  1760 ;; Defined at:
+  1761 ;;		line 23 in file "QC3-16F630-C.c"
+  1762 ;; Parameters:    Size  Location     Type
+  1763 ;;		None
+  1764 ;; Auto vars:     Size  Location     Type
+  1765 ;;		None
+  1766 ;; Return value:  Size  Location     Type
+  1767 ;;                  1    wreg      void 
+  1768 ;; Registers used:
+  1769 ;;		wreg, status,2
+  1770 ;; Tracked objects:
+  1771 ;;		On entry : 0/0
+  1772 ;;		On exit  : 0/0
+  1773 ;;		Unchanged: 0/0
+  1774 ;; Data sizes:     COMMON   BANK0
+  1775 ;;      Params:         0       0
+  1776 ;;      Locals:         0       0
+  1777 ;;      Temps:          0       0
+  1778 ;;      Totals:         0       0
+  1779 ;;Total ram usage:        0 bytes
+  1780 ;; Hardware stack levels used:    1
+  1781 ;; This function calls:
+  1782 ;;		Nothing
+  1783 ;; This function is called by:
+  1784 ;;		_ISR
+  1785 ;; This function uses a non-reentrant model
+  1786 ;;
+  1787                           
+  1788                           
+  1789                           ;psect for function i1_volt9
+  1790  0355                     i1_volt9:
+  1791  0355                     i1l1280:	
+  1792                           ;incstack = 0
+  1793                           ; Regs used in i1_volt9: [wreg+status,2]
+  1794                           
+  1795                           
+  1796                           ;QC3-16F630-C.c: 27:     TRISC = 0b00001000;
+  1797  0355  3008               	movlw	8
+  1798  0356  1683               	bsf	3,5	;RP0=1, select bank1
+  1799  0357  0087               	movwf	7	;volatile
+  1800                           
+  1801                           ;QC3-16F630-C.c: 28:     PORTC = 0b00010010;
+  1802  0358  3012               	movlw	18
+  1803  0359  1283               	bcf	3,5	;RP0=0, select bank0
+  1804  035A  0087               	movwf	7	;volatile
+  1805  035B                     i1l1282:
+  1806                           
+  1807                           ;QC3-16F630-C.c: 30:     EEADR = 0x00;
+  1808  035B  1683               	bsf	3,5	;RP0=1, select bank1
+  1809  035C  019B               	clrf	27	;volatile
+  1810  035D                     i1l1284:
+  1811                           
+  1812                           ;QC3-16F630-C.c: 31:     EEDATA = 0x45;
+  1813  035D  3045               	movlw	69
+  1814  035E  009A               	movwf	26	;volatile
+  1815  035F                     i1l1286:
+  1816                           
+  1817                           ;QC3-16F630-C.c: 32:     EECON1bits.WREN = 1;
+  1818  035F  151C               	bsf	28,2	;volsfr
+  1819  0360                     i1l1288:
+  1820                           
+  1821                           ;QC3-16F630-C.c: 33:     EECON2 = 0x55;
+  1822  0360  3055               	movlw	85
+  1823  0361  009D               	movwf	29	;volsfr
+  1824  0362                     i1l1290:
+  1825                           
+  1826                           ;QC3-16F630-C.c: 34:     EECON2 = 0xAA;
+  1827  0362  30AA               	movlw	170
+  1828  0363  009D               	movwf	29	;volsfr
+  1829  0364                     i1l1292:
+  1830                           
+  1831                           ;QC3-16F630-C.c: 35:     EECON1bits.WR = 1;
+  1832  0364  149C               	bsf	28,1	;volsfr
+  1833  0365                     i1l48:
+  1834  0365  0008               	return
+  1835  0366                     __end_ofi1_volt9:
+  1836                           
+  1837                           	psect	text9
+  1838  02A9                     __ptext9:	
+  1839 ;; *************** function i1_volt5 *****************
+  1840 ;; Defined at:
+  1841 ;;		line 37 in file "QC3-16F630-C.c"
+  1842 ;; Parameters:    Size  Location     Type
+  1843 ;;		None
+  1844 ;; Auto vars:     Size  Location     Type
+  1845 ;;		None
+  1846 ;; Return value:  Size  Location     Type
+  1847 ;;                  1    wreg      void 
+  1848 ;; Registers used:
+  1849 ;;		wreg, status,2
+  1850 ;; Tracked objects:
+  1851 ;;		On entry : 0/0
+  1852 ;;		On exit  : 0/0
+  1853 ;;		Unchanged: 0/0
+  1854 ;; Data sizes:     COMMON   BANK0
+  1855 ;;      Params:         0       0
+  1856 ;;      Locals:         0       0
+  1857 ;;      Temps:          0       2
+  1858 ;;      Totals:         0       2
+  1859 ;;Total ram usage:        2 bytes
+  1860 ;; Hardware stack levels used:    1
+  1861 ;; This function calls:
+  1862 ;;		Nothing
+  1863 ;; This function is called by:
+  1864 ;;		_ISR
+  1865 ;; This function uses a non-reentrant model
+  1866 ;;
+  1867                           
+  1868                           
+  1869                           ;psect for function i1_volt5
+  1870  02A9                     i1_volt5:
+  1871  02A9                     i1l1294:	
+  1872                           ;incstack = 0
+  1873                           ; Regs used in i1_volt5: [wreg+status,2]
+  1874                           
+  1875                           
+  1876                           ;QC3-16F630-C.c: 41:     TRISC = 0b00010000;
+  1877  02A9  3010               	movlw	16
+  1878  02AA  1683               	bsf	3,5	;RP0=1, select bank1
+  1879  02AB  0087               	movwf	7	;volatile
+  1880                           
+  1881                           ;QC3-16F630-C.c: 42:     PORTC = 0b00000001;
+  1882  02AC  3001               	movlw	1
+  1883  02AD  1283               	bcf	3,5	;RP0=0, select bank0
+  1884  02AE  0087               	movwf	7	;volatile
+  1885  02AF                     i1l1296:
+  1886                           
+  1887                           ;QC3-16F630-C.c: 43:     PORTAbits.RA1 = 0;
+  1888  02AF  1085               	bcf	5,1	;volatile
+  1889  02B0                     i1l1298:
+  1890                           
+  1891                           ;QC3-16F630-C.c: 45:     EEADR = 0x00;
+  1892  02B0  1683               	bsf	3,5	;RP0=1, select bank1
+  1893  02B1  019B               	clrf	27	;volatile
+  1894  02B2                     i1l1300:
+  1895                           
+  1896                           ;QC3-16F630-C.c: 46:     EEDATA = 0x25;
+  1897  02B2  3025               	movlw	37
+  1898  02B3  009A               	movwf	26	;volatile
+  1899  02B4                     i1l1302:
+  1900                           
+  1901                           ;QC3-16F630-C.c: 47:     EECON1bits.WREN = 1;
+  1902  02B4  151C               	bsf	28,2	;volsfr
+  1903  02B5                     i1l1304:
+  1904                           
+  1905                           ;QC3-16F630-C.c: 48:     EECON2 = 0x55;
+  1906  02B5  3055               	movlw	85
+  1907  02B6  009D               	movwf	29	;volsfr
+  1908  02B7                     i1l1306:
+  1909                           
+  1910                           ;QC3-16F630-C.c: 49:     EECON2 = 0xAA;
+  1911  02B7  30AA               	movlw	170
+  1912  02B8  009D               	movwf	29	;volsfr
+  1913  02B9                     i1l1308:
+  1914                           
+  1915                           ;QC3-16F630-C.c: 50:     EECON1bits.WR = 1;
+  1916  02B9  149C               	bsf	28,1	;volsfr
+  1917  02BA                     i1l1310:
+  1918                           
+  1919                           ;QC3-16F630-C.c: 52:     _delay((unsigned long)((20)*(20000000/4000.0)));
+  1920  02BA  3082               	movlw	130
+  1921  02BB  1283               	bcf	3,5	;RP0=0, select bank0
+  1922  02BC  00A1               	movwf	??i1_volt5+1
+  1923  02BD  30DD               	movlw	221
+  1924  02BE  00A0               	movwf	??i1_volt5
+  1925  02BF                     u62_27:
+  1926  02BF  0BA0               	decfsz	??i1_volt5,f
+  1927  02C0  2ABF               	goto	u62_27
+  1928  02C1  0BA1               	decfsz	??i1_volt5+1,f
+  1929  02C2  2ABF               	goto	u62_27
+  1930  02C3  2AC4               	nop2
+  1931  02C4                     i1l1312:
+  1932                           
+  1933                           ;QC3-16F630-C.c: 53:     EEADR = 0x01;
+  1934  02C4  3001               	movlw	1
+  1935  02C5  1683               	bsf	3,5	;RP0=1, select bank1
+  1936  02C6  009B               	movwf	27	;volatile
+  1937                           
+  1938                           ;QC3-16F630-C.c: 54:     EEDATA = 0x00;
+  1939  02C7  019A               	clrf	26	;volatile
+  1940  02C8                     i1l1314:
+  1941                           
+  1942                           ;QC3-16F630-C.c: 55:     EECON1bits.WREN = 1;
+  1943  02C8  151C               	bsf	28,2	;volsfr
+  1944  02C9                     i1l1316:
+  1945                           
+  1946                           ;QC3-16F630-C.c: 56:     EECON2 = 0x55;
+  1947  02C9  3055               	movlw	85
+  1948  02CA  009D               	movwf	29	;volsfr
+  1949  02CB                     i1l1318:
+  1950                           
+  1951                           ;QC3-16F630-C.c: 57:     EECON2 = 0xAA;
+  1952  02CB  30AA               	movlw	170
+  1953  02CC  009D               	movwf	29	;volsfr
+  1954  02CD                     i1l1320:
+  1955                           
+  1956                           ;QC3-16F630-C.c: 58:     EECON1bits.WR = 1;
+  1957  02CD  149C               	bsf	28,1	;volsfr
+  1958  02CE                     i1l51:
+  1959  02CE  0008               	return
+  1960  02CF                     __end_ofi1_volt5:
+  1961                           
+  1962                           	psect	text10
+  1963  0366                     __ptext10:	
+  1964 ;; *************** function i1_volt12 *****************
+  1965 ;; Defined at:
+  1966 ;;		line 10 in file "QC3-16F630-C.c"
+  1967 ;; Parameters:    Size  Location     Type
+  1968 ;;		None
+  1969 ;; Auto vars:     Size  Location     Type
+  1970 ;;		None
+  1971 ;; Return value:  Size  Location     Type
+  1972 ;;                  1    wreg      void 
+  1973 ;; Registers used:
+  1974 ;;		wreg, status,2
+  1975 ;; Tracked objects:
+  1976 ;;		On entry : 0/0
+  1977 ;;		On exit  : 0/0
+  1978 ;;		Unchanged: 0/0
+  1979 ;; Data sizes:     COMMON   BANK0
+  1980 ;;      Params:         0       0
+  1981 ;;      Locals:         0       0
+  1982 ;;      Temps:          0       0
+  1983 ;;      Totals:         0       0
+  1984 ;;Total ram usage:        0 bytes
+  1985 ;; Hardware stack levels used:    1
+  1986 ;; This function calls:
+  1987 ;;		Nothing
+  1988 ;; This function is called by:
+  1989 ;;		_ISR
+  1990 ;; This function uses a non-reentrant model
+  1991 ;;
+  1992                           
+  1993                           
+  1994                           ;psect for function i1_volt12
+  1995  0366                     i1_volt12:
+  1996  0366                     i1l1266:	
+  1997                           ;incstack = 0
+  1998                           ; Regs used in i1_volt12: [wreg+status,2]
+  1999                           
+  2000                           
+  2001                           ;QC3-16F630-C.c: 13:     TRISC = 0b00011000;
+  2002  0366  3018               	movlw	24
+  2003  0367  1683               	bsf	3,5	;RP0=1, select bank1
+  2004  0368  0087               	movwf	7	;volatile
+  2005                           
+  2006                           ;QC3-16F630-C.c: 14:     PORTC = 0b00000100;
+  2007  0369  3004               	movlw	4
+  2008  036A  1283               	bcf	3,5	;RP0=0, select bank0
+  2009  036B  0087               	movwf	7	;volatile
+  2010  036C                     i1l1268:
+  2011                           
+  2012                           ;QC3-16F630-C.c: 16:     EEADR = 0x00;
+  2013  036C  1683               	bsf	3,5	;RP0=1, select bank1
+  2014  036D  019B               	clrf	27	;volatile
+  2015  036E                     i1l1270:
+  2016                           
+  2017                           ;QC3-16F630-C.c: 17:     EEDATA = 0x60;
+  2018  036E  3060               	movlw	96
+  2019  036F  009A               	movwf	26	;volatile
+  2020  0370                     i1l1272:
+  2021                           
+  2022                           ;QC3-16F630-C.c: 18:     EECON1bits.WREN = 1;
+  2023  0370  151C               	bsf	28,2	;volsfr
+  2024  0371                     i1l1274:
+  2025                           
+  2026                           ;QC3-16F630-C.c: 19:     EECON2 = 0x55;
+  2027  0371  3055               	movlw	85
+  2028  0372  009D               	movwf	29	;volsfr
+  2029  0373                     i1l1276:
+  2030                           
+  2031                           ;QC3-16F630-C.c: 20:     EECON2 = 0xAA;
+  2032  0373  30AA               	movlw	170
+  2033  0374  009D               	movwf	29	;volsfr
+  2034  0375                     i1l1278:
+  2035                           
+  2036                           ;QC3-16F630-C.c: 21:     EECON1bits.WR = 1;
+  2037  0375  149C               	bsf	28,1	;volsfr
+  2038  0376                     i1l45:
+  2039  0376  0008               	return
+  2040  0377                     __end_ofi1_volt12:
+  2041                           
+  2042                           	psect	text11
+  2043  01A8                     __ptext11:	
+  2044 ;; *************** function i1_continuous *****************
+  2045 ;; Defined at:
+  2046 ;;		line 75 in file "QC3-16F630-C.c"
+  2047 ;; Parameters:    Size  Location     Type
+  2048 ;;		None
+  2049 ;; Auto vars:     Size  Location     Type
+  2050 ;;  i               2    7[BANK0 ] int 
+  2051 ;;  i               2    5[BANK0 ] int 
+  2052 ;; Return value:  Size  Location     Type
+  2053 ;;                  1    wreg      void 
+  2054 ;; Registers used:
+  2055 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  2056 ;; Tracked objects:
+  2057 ;;		On entry : 0/0
+  2058 ;;		On exit  : 0/0
+  2059 ;;		Unchanged: 0/0
+  2060 ;; Data sizes:     COMMON   BANK0
+  2061 ;;      Params:         0       0
+  2062 ;;      Locals:         0       4
+  2063 ;;      Temps:          0       3
+  2064 ;;      Totals:         0       7
+  2065 ;;Total ram usage:        7 bytes
+  2066 ;; Hardware stack levels used:    1
+  2067 ;; Hardware stack levels required when called:    1
+  2068 ;; This function calls:
+  2069 ;;		i1_dec200mv
+  2070 ;;		i1_inc200mv
+  2071 ;; This function is called by:
+  2072 ;;		_ISR
+  2073 ;; This function uses a non-reentrant model
+  2074 ;;
+  2075                           
+  2076                           
+  2077                           ;psect for function i1_continuous
+  2078  01A8                     i1_continuous:
+  2079  01A8                     i1l1322:	
+  2080                           ;incstack = 0
+  2081                           ; Regs used in i1_continuous: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  2082                           
+  2083                           
+  2084                           ;QC3-16F630-C.c: 79:     TRISC = 0b00010000;
+  2085  01A8  3010               	movlw	16
+  2086  01A9  1683               	bsf	3,5	;RP0=1, select bank1
+  2087  01AA  0087               	movwf	7	;volatile
+  2088                           
+  2089                           ;QC3-16F630-C.c: 80:     PORTC = 0b00001000;
+  2090  01AB  3008               	movlw	8
+  2091  01AC  1283               	bcf	3,5	;RP0=0, select bank0
+  2092  01AD  0087               	movwf	7	;volatile
+  2093  01AE                     i1l1324:
+  2094                           
+  2095                           ;QC3-16F630-C.c: 81:     PORTAbits.RA1 = 1;
+  2096  01AE  1485               	bsf	5,1	;volatile
+  2097  01AF                     i1l1326:
+  2098                           
+  2099                           ;QC3-16F630-C.c: 83:     if(changed == 0){
+  2100  01AF  083B               	movf	_changed,w
+  2101  01B0  043C               	iorwf	_changed+1,w
+  2102  01B1  1D03               	btfss	3,2
+  2103  01B2  29B4               	goto	u32_21
+  2104  01B3  29B5               	goto	u32_20
+  2105  01B4                     u32_21:
+  2106  01B4  29D4               	goto	i1l1346
+  2107  01B5                     u32_20:
+  2108  01B5                     i1l1328:
+  2109                           
+  2110                           ;QC3-16F630-C.c: 85:         EEADR = 0x01;
+  2111  01B5  3001               	movlw	1
+  2112  01B6  1683               	bsf	3,5	;RP0=1, select bank1
+  2113  01B7  009B               	movwf	27	;volatile
+  2114                           
+  2115                           ;QC3-16F630-C.c: 86:         EEDATA = 0x01;
+  2116  01B8  3001               	movlw	1
+  2117  01B9  009A               	movwf	26	;volatile
+  2118  01BA                     i1l1330:
+  2119                           
+  2120                           ;QC3-16F630-C.c: 87:         EECON1bits.WREN = 1;
+  2121  01BA  151C               	bsf	28,2	;volsfr
+  2122                           
+  2123                           ;QC3-16F630-C.c: 88:         EECON2 = 0x55;
+  2124  01BB  3055               	movlw	85
+  2125  01BC  009D               	movwf	29	;volsfr
+  2126                           
+  2127                           ;QC3-16F630-C.c: 89:         EECON2 = 0xAA;
+  2128  01BD  30AA               	movlw	170
+  2129  01BE  009D               	movwf	29	;volsfr
+  2130  01BF                     i1l1332:
+  2131                           
+  2132                           ;QC3-16F630-C.c: 90:         EECON1bits.WR = 1;
+  2133  01BF  149C               	bsf	28,1	;volsfr
+  2134                           
+  2135                           ;QC3-16F630-C.c: 92:         _delay((unsigned long)((20)*(20000000/4000.0)));
+  2136  01C0  3082               	movlw	130
+  2137  01C1  1283               	bcf	3,5	;RP0=0, select bank0
+  2138  01C2  00A3               	movwf	??i1_continuous+1
+  2139  01C3  30DD               	movlw	221
+  2140  01C4  00A2               	movwf	??i1_continuous
+  2141  01C5                     u63_27:
+  2142  01C5  0BA2               	decfsz	??i1_continuous,f
+  2143  01C6  29C5               	goto	u63_27
+  2144  01C7  0BA3               	decfsz	??i1_continuous+1,f
+  2145  01C8  29C5               	goto	u63_27
+  2146  01C9  29CA               	nop2
+  2147  01CA                     i1l1334:
+  2148                           
+  2149                           ;QC3-16F630-C.c: 93:         EEADR = 0x00;
+  2150  01CA  1683               	bsf	3,5	;RP0=1, select bank1
+  2151  01CB  019B               	clrf	27	;volatile
+  2152  01CC                     i1l1336:
+  2153                           
+  2154                           ;QC3-16F630-C.c: 94:         EEDATA = 0x25;
+  2155  01CC  3025               	movlw	37
+  2156  01CD  009A               	movwf	26	;volatile
+  2157  01CE                     i1l1338:
+  2158                           
+  2159                           ;QC3-16F630-C.c: 95:         EECON1bits.WREN = 1;
+  2160  01CE  151C               	bsf	28,2	;volsfr
+  2161  01CF                     i1l1340:
+  2162                           
+  2163                           ;QC3-16F630-C.c: 96:         EECON2 = 0x55;
+  2164  01CF  3055               	movlw	85
+  2165  01D0  009D               	movwf	29	;volsfr
+  2166  01D1                     i1l1342:
+  2167                           
+  2168                           ;QC3-16F630-C.c: 97:         EECON2 = 0xAA;
+  2169  01D1  30AA               	movlw	170
+  2170  01D2  009D               	movwf	29	;volsfr
+  2171  01D3                     i1l1344:
+  2172                           
+  2173                           ;QC3-16F630-C.c: 98:         EECON1bits.WR = 1;
+  2174  01D3  149C               	bsf	28,1	;volsfr
+  2175  01D4                     i1l1346:
+  2176                           
+  2177                           ;QC3-16F630-C.c: 100:     if(changed == 1){
+  2178  01D4  1283               	bcf	3,5	;RP0=0, select bank0
+  2179  01D5  033B               	decf	_changed,w
+  2180  01D6  043C               	iorwf	_changed+1,w
+  2181  01D7  1D03               	btfss	3,2
+  2182  01D8  29DA               	goto	u33_21
+  2183  01D9  29DB               	goto	u33_20
+  2184  01DA                     u33_21:
+  2185  01DA  2A49               	goto	i1l70
+  2186  01DB                     u33_20:
+  2187  01DB                     i1l1348:
+  2188                           
+  2189                           ;QC3-16F630-C.c: 102:         EEADR = 0x01;
+  2190  01DB  3001               	movlw	1
+  2191  01DC  1683               	bsf	3,5	;RP0=1, select bank1
+  2192  01DD  009B               	movwf	27	;volatile
+  2193                           
+  2194                           ;QC3-16F630-C.c: 103:         EEDATA = 0x01;
+  2195  01DE  3001               	movlw	1
+  2196  01DF  009A               	movwf	26	;volatile
+  2197  01E0                     i1l1350:
+  2198                           
+  2199                           ;QC3-16F630-C.c: 104:         EECON1bits.WREN = 1;
+  2200  01E0  151C               	bsf	28,2	;volsfr
+  2201                           
+  2202                           ;QC3-16F630-C.c: 105:         EECON2 = 0x55;
+  2203  01E1  3055               	movlw	85
+  2204  01E2  009D               	movwf	29	;volsfr
+  2205                           
+  2206                           ;QC3-16F630-C.c: 106:         EECON2 = 0xAA;
+  2207  01E3  30AA               	movlw	170
+  2208  01E4  009D               	movwf	29	;volsfr
+  2209  01E5                     i1l1352:
+  2210                           
+  2211                           ;QC3-16F630-C.c: 107:         EECON1bits.WR = 1;
+  2212  01E5  149C               	bsf	28,1	;volsfr
+  2213                           
+  2214                           ;QC3-16F630-C.c: 109:         _delay((unsigned long)((20)*(20000000/4000.0)));
+  2215  01E6  3082               	movlw	130
+  2216  01E7  1283               	bcf	3,5	;RP0=0, select bank0
+  2217  01E8  00A3               	movwf	??i1_continuous+1
+  2218  01E9  30DD               	movlw	221
+  2219  01EA  00A2               	movwf	??i1_continuous
+  2220  01EB                     u64_27:
+  2221  01EB  0BA2               	decfsz	??i1_continuous,f
+  2222  01EC  29EB               	goto	u64_27
+  2223  01ED  0BA3               	decfsz	??i1_continuous+1,f
+  2224  01EE  29EB               	goto	u64_27
+  2225  01EF  29F0               	nop2
+  2226  01F0                     i1l1354:
+  2227                           
+  2228                           ;QC3-16F630-C.c: 110:         EEADR = 0x00;
+  2229  01F0  1683               	bsf	3,5	;RP0=1, select bank1
+  2230  01F1  019B               	clrf	27	;volatile
+  2231  01F2                     i1l1356:
+  2232                           
+  2233                           ;QC3-16F630-C.c: 111:         EECON1bits.RD = 1;
+  2234  01F2  141C               	bsf	28,0	;volsfr
+  2235  01F3                     i1l1358:
+  2236                           
+  2237                           ;QC3-16F630-C.c: 112:         eep1 = EEDATA;
+  2238  01F3  081A               	movf	26,w	;volatile
+  2239  01F4  00DF               	movwf	btemp+1
+  2240  01F5  085F               	movf	btemp+1,w
+  2241  01F6  1283               	bcf	3,5	;RP0=0, select bank0
+  2242  01F7  00BE               	movwf	_eep1
+  2243  01F8                     i1l1360:
+  2244                           
+  2245                           ;QC3-16F630-C.c: 113:         if(eep1 > 0x25){
+  2246  01F8  3026               	movlw	38
+  2247  01F9  023E               	subwf	_eep1,w
+  2248  01FA  1C03               	skipc
+  2249  01FB  29FD               	goto	u34_21
+  2250  01FC  29FE               	goto	u34_20
+  2251  01FD                     u34_21:
+  2252  01FD  2A20               	goto	i1l1370
+  2253  01FE                     u34_20:
+  2254  01FE                     i1l1362:
+  2255                           
+  2256                           ;QC3-16F630-C.c: 114:             for(int i = 0x01; i<= eep1-0x25 ;i++ ){
+  2257  01FE  3001               	movlw	1
+  2258  01FF  00A5               	movwf	i1continuous@i
+  2259  0200  3000               	movlw	0
+  2260  0201  00A6               	movwf	i1continuous@i+1
+  2261  0202  2A0B               	goto	i1l1368
+  2262  0203                     i1l1364:
+  2263                           
+  2264                           ;QC3-16F630-C.c: 115:                 inc200mv();
+  2265  0203  2301               	fcall	i1_inc200mv
+  2266  0204                     i1l1366:
+  2267                           
+  2268                           ;QC3-16F630-C.c: 116:             }
+  2269  0204  3001               	movlw	1
+  2270  0205  1283               	bcf	3,5	;RP0=0, select bank0
+  2271  0206  07A5               	addwf	i1continuous@i,f
+  2272  0207  1803               	skipnc
+  2273  0208  0AA6               	incf	i1continuous@i+1,f
+  2274  0209  3000               	movlw	0
+  2275  020A  07A6               	addwf	i1continuous@i+1,f
+  2276  020B                     i1l1368:
+  2277  020B  083E               	movf	_eep1,w
+  2278  020C  3EDB               	addlw	219
+  2279  020D  00A2               	movwf	??i1_continuous
+  2280  020E  30FF               	movlw	255
+  2281  020F  1803               	skipnc
+  2282  0210  3000               	movlw	0
+  2283  0211  00A3               	movwf	??i1_continuous+1
+  2284  0212  0823               	movf	??i1_continuous+1,w
+  2285  0213  3A80               	xorlw	128
+  2286  0214  00A4               	movwf	??i1_continuous+2
+  2287  0215  0826               	movf	i1continuous@i+1,w
+  2288  0216  3A80               	xorlw	128
+  2289  0217  0224               	subwf	??i1_continuous+2,w
+  2290  0218  1D03               	skipz
+  2291  0219  2A1C               	goto	u35_25
+  2292  021A  0825               	movf	i1continuous@i,w
+  2293  021B  0222               	subwf	??i1_continuous,w
+  2294  021C                     u35_25:
+  2295  021C  1803               	skipnc
+  2296  021D  2A1F               	goto	u35_21
+  2297  021E  2A20               	goto	u35_20
+  2298  021F                     u35_21:
+  2299  021F  2A03               	goto	i1l1364
+  2300  0220                     u35_20:
+  2301  0220                     i1l1370:
+  2302                           
+  2303                           ;QC3-16F630-C.c: 118:         if(eep1 < 0x25){
+  2304  0220  3025               	movlw	37
+  2305  0221  1283               	bcf	3,5	;RP0=0, select bank0
+  2306  0222  023E               	subwf	_eep1,w
+  2307  0223  1803               	skipnc
+  2308  0224  2A26               	goto	u36_21
+  2309  0225  2A27               	goto	u36_20
+  2310  0226                     u36_21:
+  2311  0226  2A49               	goto	i1l70
+  2312  0227                     u36_20:
+  2313  0227                     i1l1372:
+  2314                           
+  2315                           ;QC3-16F630-C.c: 119:             for(int i = 0x01; i <= 0x25 - eep1; i++){
+  2316  0227  3001               	movlw	1
+  2317  0228  00A7               	movwf	i1continuous@i_185
+  2318  0229  3000               	movlw	0
+  2319  022A  00A8               	movwf	i1continuous@i_185+1
+  2320  022B  2A34               	goto	i1l1378
+  2321  022C                     i1l1374:
+  2322                           
+  2323                           ;QC3-16F630-C.c: 120:                 dec200mv();
+  2324  022C  231A               	fcall	i1_dec200mv
+  2325  022D                     i1l1376:
+  2326                           
+  2327                           ;QC3-16F630-C.c: 121:             }
+  2328  022D  3001               	movlw	1
+  2329  022E  1283               	bcf	3,5	;RP0=0, select bank0
+  2330  022F  07A7               	addwf	i1continuous@i_185,f
+  2331  0230  1803               	skipnc
+  2332  0231  0AA8               	incf	i1continuous@i_185+1,f
+  2333  0232  3000               	movlw	0
+  2334  0233  07A8               	addwf	i1continuous@i_185+1,f
+  2335  0234                     i1l1378:
+  2336  0234  3000               	movlw	0
+  2337  0235  00A3               	movwf	??i1_continuous+1
+  2338  0236  083E               	movf	_eep1,w
+  2339  0237  3C25               	sublw	37
+  2340  0238  00A2               	movwf	??i1_continuous
+  2341  0239  1C03               	skipc
+  2342  023A  03A3               	decf	??i1_continuous+1,f
+  2343  023B  0823               	movf	??i1_continuous+1,w
+  2344  023C  3A80               	xorlw	128
+  2345  023D  00A4               	movwf	??i1_continuous+2
+  2346  023E  0828               	movf	i1continuous@i_185+1,w
+  2347  023F  3A80               	xorlw	128
+  2348  0240  0224               	subwf	??i1_continuous+2,w
+  2349  0241  1D03               	skipz
+  2350  0242  2A45               	goto	u37_25
+  2351  0243  0827               	movf	i1continuous@i_185,w
+  2352  0244  0222               	subwf	??i1_continuous,w
+  2353  0245                     u37_25:
+  2354  0245  1803               	skipnc
+  2355  0246  2A48               	goto	u37_21
+  2356  0247  2A49               	goto	u37_20
+  2357  0248                     u37_21:
+  2358  0248  2A2C               	goto	i1l1374
+  2359  0249                     u37_20:
+  2360  0249                     i1l70:
+  2361  0249  0008               	return
+  2362  024A                     __end_ofi1_continuous:
+  2363                           
+  2364                           	psect	text12
+  2365  0301                     __ptext12:	
+  2366 ;; *************** function i1_inc200mv *****************
+  2367 ;; Defined at:
+  2368 ;;		line 60 in file "QC3-16F630-C.c"
+  2369 ;; Parameters:    Size  Location     Type
+  2370 ;;		None
+  2371 ;; Auto vars:     Size  Location     Type
+  2372 ;;		None
+  2373 ;; Return value:  Size  Location     Type
+  2374 ;;                  1    wreg      void 
+  2375 ;; Registers used:
+  2376 ;;		wreg
+  2377 ;; Tracked objects:
+  2378 ;;		On entry : 0/0
+  2379 ;;		On exit  : 0/0
+  2380 ;;		Unchanged: 0/0
+  2381 ;; Data sizes:     COMMON   BANK0
+  2382 ;;      Params:         0       0
+  2383 ;;      Locals:         0       0
+  2384 ;;      Temps:          0       2
+  2385 ;;      Totals:         0       2
+  2386 ;;Total ram usage:        2 bytes
+  2387 ;; Hardware stack levels used:    1
+  2388 ;; This function calls:
+  2389 ;;		Nothing
+  2390 ;; This function is called by:
+  2391 ;;		i1_continuous
+  2392 ;; This function uses a non-reentrant model
+  2393 ;;
+  2394                           
+  2395                           
+  2396                           ;psect for function i1_inc200mv
+  2397  0301                     i1_inc200mv:
+  2398  0301                     i1l1140:	
+  2399                           ;incstack = 0
+  2400                           ; Regs used in i1_inc200mv: [wreg]
+  2401                           
+  2402                           
+  2403                           ;QC3-16F630-C.c: 61:         TRISCbits.TRISC4 = 0x00;
+  2404  0301  1683               	bsf	3,5	;RP0=1, select bank1
+  2405  0302  1207               	bcf	7,4	;volatile
+  2406                           
+  2407                           ;QC3-16F630-C.c: 62:         PORTCbits.RC4 = 1;
+  2408  0303  1283               	bcf	3,5	;RP0=0, select bank0
+  2409  0304  1607               	bsf	7,4	;volatile
+  2410  0305                     i1l1142:
+  2411                           
+  2412                           ;QC3-16F630-C.c: 63:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  2413  0305  3041               	movlw	65
+  2414  0306  00A1               	movwf	??i1_inc200mv+1
+  2415  0307  30EE               	movlw	238
+  2416  0308  00A0               	movwf	??i1_inc200mv
+  2417  0309                     u65_27:
+  2418  0309  0BA0               	decfsz	??i1_inc200mv,f
+  2419  030A  2B09               	goto	u65_27
+  2420  030B  0BA1               	decfsz	??i1_inc200mv+1,f
+  2421  030C  2B09               	goto	u65_27
+  2422  030D  0000               	nop
+  2423  030E                     i1l1144:
+  2424                           
+  2425                           ;QC3-16F630-C.c: 64:         PORTCbits.RC4 = 0;
+  2426  030E  1283               	bcf	3,5	;RP0=0, select bank0
+  2427  030F  1207               	bcf	7,4	;volatile
+  2428                           
+  2429                           ;QC3-16F630-C.c: 66:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  2430  0310  3041               	movlw	65
+  2431  0311  00A1               	movwf	??i1_inc200mv+1
+  2432  0312  30EE               	movlw	238
+  2433  0313  00A0               	movwf	??i1_inc200mv
+  2434  0314                     u66_27:
+  2435  0314  0BA0               	decfsz	??i1_inc200mv,f
+  2436  0315  2B14               	goto	u66_27
+  2437  0316  0BA1               	decfsz	??i1_inc200mv+1,f
+  2438  0317  2B14               	goto	u66_27
+  2439  0318  0000               	nop
+  2440  0319                     i1l54:
+  2441  0319  0008               	return
+  2442  031A                     __end_ofi1_inc200mv:
+  2443                           
+  2444                           	psect	text13
+  2445  031A                     __ptext13:	
+  2446 ;; *************** function i1_dec200mv *****************
+  2447 ;; Defined at:
+  2448 ;;		line 68 in file "QC3-16F630-C.c"
+  2449 ;; Parameters:    Size  Location     Type
+  2450 ;;		None
+  2451 ;; Auto vars:     Size  Location     Type
+  2452 ;;		None
+  2453 ;; Return value:  Size  Location     Type
+  2454 ;;                  1    wreg      void 
+  2455 ;; Registers used:
+  2456 ;;		wreg
+  2457 ;; Tracked objects:
+  2458 ;;		On entry : 0/0
+  2459 ;;		On exit  : 0/0
+  2460 ;;		Unchanged: 0/0
+  2461 ;; Data sizes:     COMMON   BANK0
+  2462 ;;      Params:         0       0
+  2463 ;;      Locals:         0       0
+  2464 ;;      Temps:          0       2
+  2465 ;;      Totals:         0       2
+  2466 ;;Total ram usage:        2 bytes
+  2467 ;; Hardware stack levels used:    1
+  2468 ;; This function calls:
+  2469 ;;		Nothing
+  2470 ;; This function is called by:
+  2471 ;;		i1_continuous
+  2472 ;; This function uses a non-reentrant model
+  2473 ;;
+  2474                           
+  2475                           
+  2476                           ;psect for function i1_dec200mv
+  2477  031A                     i1_dec200mv:
+  2478  031A                     i1l1146:	
+  2479                           ;incstack = 0
+  2480                           ; Regs used in i1_dec200mv: [wreg]
+  2481                           
+  2482                           
+  2483                           ;QC3-16F630-C.c: 69:         TRISCbits.TRISC3 = 0x00;
+  2484  031A  1683               	bsf	3,5	;RP0=1, select bank1
+  2485  031B  1187               	bcf	7,3	;volatile
+  2486                           
+  2487                           ;QC3-16F630-C.c: 70:         PORTCbits.RC3 = 0;
+  2488  031C  1283               	bcf	3,5	;RP0=0, select bank0
+  2489  031D  1187               	bcf	7,3	;volatile
+  2490  031E                     i1l1148:
+  2491                           
+  2492                           ;QC3-16F630-C.c: 71:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  2493  031E  3041               	movlw	65
+  2494  031F  00A1               	movwf	??i1_dec200mv+1
+  2495  0320  30EE               	movlw	238
+  2496  0321  00A0               	movwf	??i1_dec200mv
+  2497  0322                     u67_27:
+  2498  0322  0BA0               	decfsz	??i1_dec200mv,f
+  2499  0323  2B22               	goto	u67_27
+  2500  0324  0BA1               	decfsz	??i1_dec200mv+1,f
+  2501  0325  2B22               	goto	u67_27
+  2502  0326  0000               	nop
+  2503  0327                     i1l1150:
+  2504                           
+  2505                           ;QC3-16F630-C.c: 72:         PORTCbits.RC3 = 1;
+  2506  0327  1283               	bcf	3,5	;RP0=0, select bank0
+  2507  0328  1587               	bsf	7,3	;volatile
+  2508                           
+  2509                           ;QC3-16F630-C.c: 73:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  2510  0329  3041               	movlw	65
+  2511  032A  00A1               	movwf	??i1_dec200mv+1
+  2512  032B  30EE               	movlw	238
+  2513  032C  00A0               	movwf	??i1_dec200mv
+  2514  032D                     u68_27:
+  2515  032D  0BA0               	decfsz	??i1_dec200mv,f
+  2516  032E  2B2D               	goto	u68_27
+  2517  032F  0BA1               	decfsz	??i1_dec200mv+1,f
+  2518  0330  2B2D               	goto	u68_27
+  2519  0331  0000               	nop
+  2520  0332                     i1l57:
+  2521  0332  0008               	return
+  2522  0333                     __end_ofi1_dec200mv:
+  2523  005E                     btemp	set	94	;btemp
+  2524  005E                     wtemp0	set	94
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        2
+    BSS         6
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62     27      35
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _ISR in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_continuous
+    _continuous->_dec200mv
+    _continuous->_inc200mv
+
+Critical Paths under _ISR in BANK0
+
+    _ISR->i1_continuous
+    i1_continuous->i1_dec200mv
+    i1_continuous->i1_inc200mv
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 5     5      0      94
+                                             22 BANK0      5     5      0
+                         _continuous
+                           _dec200mv
+                           _inc200mv
+                             _volt12
+                              _volt5
+                              _volt9
+ ---------------------------------------------------------------------------------
+ (1) _volt9                                                0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _volt5                                                2     2      0       0
+                                             13 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (1) _volt12                                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _continuous                                           7     7      0      48
+                                             15 BANK0      7     7      0
+                           _dec200mv
+                           _inc200mv
+ ---------------------------------------------------------------------------------
+ (1) _inc200mv                                             2     2      0       0
+                                             13 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (1) _dec200mv                                             2     2      0       0
+                                             13 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (3) _ISR                                                  4     4      0      48
+                                              9 BANK0      4     4      0
+                       i1_continuous
+                           i1_volt12
+                            i1_volt5
+                            i1_volt9
+ ---------------------------------------------------------------------------------
+ (4) i1_volt9                                              0     0      0       0
+ ---------------------------------------------------------------------------------
+ (4) i1_volt5                                              2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (4) i1_volt12                                             0     0      0       0
+ ---------------------------------------------------------------------------------
+ (4) i1_continuous                                         7     7      0      48
+                                              2 BANK0      7     7      0
+                         i1_dec200mv
+                         i1_inc200mv
+ ---------------------------------------------------------------------------------
+ (5) i1_inc200mv                                           2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ (5) i1_dec200mv                                           2     2      0       0
+                                              0 BANK0      2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 5
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _continuous
+     _dec200mv
+     _inc200mv
+   _dec200mv
+   _inc200mv
+   _volt12
+   _volt5
+   _volt9
+
+ _ISR (ROOT)
+   i1_continuous
+     i1_dec200mv
+     i1_inc200mv
+   i1_volt12
+   i1_volt5
+   i1_volt9
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+SFR1                 0      0       0       2        0.0%
+BITSFR1              0      0       0       2        0.0%
+BANK0               3E     1B      23       4       56.5%
+BITBANK0            3E      0       0       3        0.0%
+SFR0                 0      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITCOMMON            0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+DATA                 0      0      23       6        0.0%
+ABS                  0      0      23       5        0.0%
+NULL                 0      0       0       0        0.0%
+STACK                0      0       0       2        0.0%
+EEDATA              80      0       0       0        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.20 build 20200408173844 
+Symbol Table                                                                                   Tue Jul 21 06:25:58 2020
+
+                     l51 02A8                       l45 0354                       l54 02E7  
+                     l70 01A7                       l48 0343                       l57 0300  
+                     l96 00BC               i1_inc200mv 0301                      u300 0185  
+                    u301 0184                      u310 01A7                      u311 01A6  
+                    u400 0078                      u401 0077                      u410 007D  
+                    u315 01A3                      u411 007C                      u260 0113  
+                    u500 0104                      u420 0089                      u261 0112  
+                    u501 0103                      u421 0088                      u270 0139  
+                    u430 0095                      u271 0138                      u431 0094  
+                    u280 015C                      u440 009A                      u281 015B  
+                    u441 0099                      u290 017E                      u450 00A6  
+                    u291 017D                      u451 00A5                      u460 00AB  
+                    _ISR 024A                      u461 00AA                      u517 003B  
+                    u470 00BA                      u390 006E                      u607 02F0  
+                    u295 017A                      u471 00B9                      u391 006D  
+                    u527 0049                      u480 00C0                      u617 02FB  
+                    u481 00BF                      u537 005A                      u490 00DC  
+                    u547 00F8                      u491 00DB                      u557 0299  
+                    u567 0123                      u577 0149                      u587 02D7  
+                    u597 02E2                      fsr0 0004                     ?_ISR 0020  
+                   l1200 02A2                     l1130 02D3                     l1210 010C  
+                   l1202 02A3                     l1132 02DC                     l1220 0128  
+                   l1212 010D                     l1204 02A5                     l1134 02E8  
+                   l1230 0131                     l1222 012A                     l1214 0113  
+                   l1206 02A7                     l1136 02EC                     l1128 02CF  
+                   l1240 014E                     l1224 012C                     l1216 0118  
+                   l1232 0132                     l1208 0106                     l1160 034F  
+                   l1152 0344                     l1138 02F5                     l1250 0161  
+                   l1242 0150                     l1234 0139                     l1226 012D  
+                   l1218 011D                     l1162 0351                     l1154 034A  
+                   l1170 033B                     l1410 0020                     l1260 018A  
+                   l1252 0162                     l1244 0151                     l1236 013E  
+                   l1228 012F                     l1164 0353                     l1156 034C  
+                   l1180 0283                     l1172 033D                     l1500 00BA  
+                   l1420 0026                     l1412 0021                     l1262 018B  
+                   l1254 0169                     l1246 0156                     l1238 0143  
+                   l1158 034E                     l1190 028F                     l1182 0289  
+                   l1174 033E                     l1166 0333                     l1510 00CE  
+                   l1502 00C0                     l1430 002E                     l1422 0027  
+                   l1414 0022                     l1406 001C                     l1264 0192  
+                   l1248 015C                     l1256 017E                     l1192 0291  
+                   l1184 028A                     l1176 0340                     l1168 0339  
+                   l1512 00D1                     l1504 00C1                     l1520 00D7  
+                   l1440 0033                     l1432 002F                     l1424 002A  
+                   l1416 0023                     l1408 001F                     l1258 0185  
+                   l1194 0293                     l1186 028C                     l1178 0342  
+                   l1530 00E8                     l1522 00DC                     l1514 00D2  
+                   l1506 00C6                     l1450 0050                     l1442 0035  
+                   l1434 0030                     l1426 002C                     l1418 0025  
+                   l1196 0294                     l1188 028E                     l1532 00EB  
+                   l1524 00DD                     l1540 00F1                     l1516 00D4  
+                   l1508 00C8                     l1460 0063                     l1452 0051  
+                   l1444 0042                     l1436 0031                     l1428 002D  
+                   l1198 029E                     l1534 00EC                     l1526 00E0  
+                   l1518 00D6                     l1542 00FF                     l1470 0078  
+                   l1462 0068                     l1454 0056                     l1446 0044  
+                   l1438 0032                     l1536 00EE                     l1528 00E2  
+                   l1480 008D                     l1472 007D                     l1464 006E  
+                   l1456 005F                     l1448 004E                     l1538 00F0  
+                   l1490 009F                     l1482 008E                     l1474 0081  
+                   l1466 0070                     l1458 0062                     l1492 00A6  
+                   l1484 0095                     l1476 0082                     l1468 0071  
+                   l1494 00AB                     l1486 009A                     l1478 0089  
+                   l1496 00B3                     l1488 009E                     l1498 00B4  
+                   i1l51 02CE                     i1l45 0376                     i1l54 0319  
+                   i1l70 0249                     i1l48 0365                     i1l57 0332  
+                   i1l83 0277                     i1l78 0276                     _dem1 0041  
+                   _dem2 003D                     _eep1 003E                     _main 001C  
+                   btemp 005E                     start 000F          __end_ofi1_volt5 02CF  
+        __end_ofi1_volt9 0366                    ??_ISR 0029                    ?_main 0020  
+                  _EEADR 009B                    _CMCON 0019                    u32_20 01B5  
+                  u32_21 01B4                    u33_20 01DB                    u33_21 01DA  
+                  u34_20 01FE                    u34_21 01FD                    u35_20 0220  
+                  u35_21 021F                    _PORTC 0007                    u35_25 021C  
+                  u36_20 0227                    u36_21 0226                    u37_20 0249  
+                  u37_21 0248                    u37_25 0245                    u38_20 024E  
+                  u38_21 024D                    u62_27 02BF                    u63_27 01C5  
+                  u64_27 01EB                    _TRISA 0085                    _TRISC 0087  
+                  u65_27 0309                    u66_27 0314                    u67_27 0322  
+                  u68_27 032D    __size_ofi1_continuous 00A2                    _volt5 0283  
+                  _volt9 0333                    main@t 0039              continuous@i 0032  
+                  pclath 000A                    status 0003                    wtemp0 005E  
+       __end_ofi1_volt12 0377              ?i1_dec200mv 0020          __initialization 0010  
+           __end_of_main 0106              ?i1_inc200mv 0020                   ??_main 0036  
+           i1_continuous 01A8         __end_of_dec200mv 0301                   _EEDATA 009A  
+                 _EECON2 009D                   ?_volt5 0020                   ?_volt9 0020  
+                 i1l1140 0301                   i1l1300 02B2                   i1l1150 0327  
+                 i1l1142 0305                   i1l1310 02BA                   i1l1302 02B4  
+                 i1l1144 030E                   i1l1320 02CD                   i1l1312 02C4  
+                 i1l1304 02B5                   i1l1146 031A                   i1l1330 01BA  
+                 i1l1322 01A8                   i1l1314 02C8                   i1l1306 02B7  
+                 i1l1148 031E                   i1l1340 01CF                   i1l1332 01BF  
+                 i1l1324 01AE                   i1l1316 02C9                   i1l1308 02B9  
+                 i1l1350 01E0                   i1l1342 01D1                   i1l1334 01CA  
+                 i1l1326 01AF                   i1l1270 036E                   i1l1318 02CB  
+                 i1l1360 01F8                   i1l1352 01E5                   i1l1344 01D3  
+                 i1l1336 01CC                   i1l1328 01B5                   i1l1272 0370  
+                 i1l1280 0355                   i1l1362 01FE                   i1l1370 0220  
+                 i1l1354 01F0                   i1l1338 01CE                   i1l1346 01D4  
+                 i1l1274 0371                   i1l1266 0366                   i1l1290 0362  
+                 i1l1282 035B                   i1l1372 0227                   i1l1364 0203  
+                 i1l1356 01F2                   i1l1348 01DB                   i1l1276 0373  
+                 i1l1268 036C                   i1l1292 0364                   i1l1284 035D  
+                 i1l1380 024A                   i1l1374 022C                   i1l1366 0204  
+                 i1l1358 01F3                   i1l1278 0375                   i1l1294 02A9  
+                 i1l1286 035F                   i1l1390 0259                   i1l1382 024E  
+                 i1l1376 022D                   i1l1368 020B                   i1l1296 02AF  
+                 i1l1288 0360                   i1l1392 025B                   i1l1384 0255  
+                 i1l1378 0234                   i1l1298 02B0                   i1l1394 025C  
+                 i1l1386 0257                   i1l1574 0265                   i1l1398 0260  
+       __end_of_inc200mv 02E8                ??i1_volt5 0020                ??i1_volt9 0000  
+                 _volt12 0344                   main@t1 003A                   saved_w 005E  
+    __size_ofi1_dec200mv 0019  __end_of__initialization 001A      __size_ofi1_inc200mv 0019  
+         __pcstackCOMMON 0000             __pidataBANK0 0377            __end_of_volt5 02A9  
+          __end_of_volt9 0344                ?i1_volt12 0020                  ??_volt5 002D  
+                ??_volt9 0000               __pbssBANK0 003B               __pmaintext 001C  
+              ?_dec200mv 0020               __pintentry 0004                  ?_volt12 0020  
+              ?_inc200mv 0020        i1continuous@i_185 0027               ??i1_volt12 0000  
+                i1_volt5 02A9                  i1_volt9 0355               _continuous 0106  
+           ??i1_dec200mv 0020               ??_dec200mv 002D             ??i1_inc200mv 0020  
+                _changed 003B                  _eepdata 0040                  __ptext1 0333  
+                __ptext2 0283                  __ptext3 0344                  __ptext4 0106  
+                __ptext5 02CF                  __ptext6 02E8                  __ptext7 024A  
+                __ptext8 0355                  __ptext9 02A9          __size_of_volt12 0011  
+             ??_inc200mv 002D             __size_of_ISR 0039       __end_ofi1_dec200mv 0333  
+   end_of_initialization 001A       __end_ofi1_inc200mv 031A                _PORTAbits 0005  
+              _PORTCbits 0007                _TRISAbits 0085                _TRISCbits 0087  
+            ?_continuous 0020           __end_of_volt12 0355      start_initialization 0010  
+            __end_of_ISR 0283        __size_ofi1_volt12 0011              __pdataBANK0 0041  
+      __size_of_dec200mv 0019                 ??_volt12 0000      __size_of_continuous 00A2  
+              ___latbits 0000            __pcstackBANK0 0020        __size_of_inc200mv 0019  
+          i1continuous@i 0025                 ?i1_volt5 0020                 ?i1_volt9 0020  
+              _eepselect 003F            ?i1_continuous 0020           __size_of_volt5 0026  
+         __size_of_volt9 0011        interrupt_function 0004           ??i1_continuous 0022  
+               i1_volt12 0366          continuous@i_185 0034             ??_continuous 002F  
+       __size_ofi1_volt5 0026         __size_ofi1_volt9 0011               _EECON1bits 009C  
+               _dec200mv 02E8                 _inc200mv 02CF       __end_of_continuous 01A8  
+               __ptext10 0366                 __ptext11 01A8                 __ptext12 0301  
+               __ptext13 031A            __size_of_main 00EA               _INTCONbits 000B  
+               intlevel1 0000     __end_ofi1_continuous 024A               _OPTION_REG 0081  
+             i1_dec200mv 031A  
