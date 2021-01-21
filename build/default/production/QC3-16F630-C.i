@@ -7,7 +7,6 @@
 # 1 "D:/MPLAB 5.4/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "QC3-16F630-C.c" 2
-
 # 1 "D:/MPLAB 5.4/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "D:/MPLAB 5.4/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -865,27 +864,58 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "D:/MPLAB 5.4/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 2 "QC3-16F630-C.c" 2
+# 1 "QC3-16F630-C.c" 2
 
-int dem1 = 1;
+#pragma config FOSC = INTRCIO
+#pragma config WDTE = OFF
+#pragma config PWRTE = OFF
+#pragma config MCLRE = ON
+#pragma config BOREN = OFF
+#pragma config CP = OFF
+#pragma config CPD = OFF
 unsigned char eepdata;
 unsigned char eepselect;
 unsigned char eep1;
 int changed = 0;
+int dem1 = 0;
 char dem2 = 0x00;
+int mydelay(int t){
+    OPTION_REGbits.T0CS = 0;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.PS2 = 1;
+    OPTION_REGbits.PS1 = 0;
+    OPTION_REGbits.PS0 = 0;
+    TMR0 = t;
+    for(int i=1;i<=200;i++){
+        while(T0IF == 0){
 
+        }
+        T0IF = 0;
+        TMR0 = t;
+    }
+    return 0;
+}
+int eepromwrite(int add, int dat){
+    EEADR = add;
+    EEDATA = dat;
+    EECON1bits.WREN = 1;
+    EECON2 = 0x55;
+    EECON2 = 0xAA;
+    EECON1bits.WR = 1;
+    return 0;
+}
+int eepromread(int add){
+    EEADR = add;
+    EECON1bits.RD = 1;
+    int dat = EEDATA;
+    return dat;
+}
 void volt12(){
 
 
     TRISC = 0b00011000;
     PORTC = 0b00000100;
-
-    EEADR = 0x00;
-    EEDATA = 0x60;
-    EECON1bits.WREN = 1;
-    EECON2 = 0x55;
-    EECON2 = 0xAA;
-    EECON1bits.WR = 1;
+    eepromwrite(0x00,0x60);
 }
 void volt9(){
 
@@ -893,13 +923,7 @@ void volt9(){
 
     TRISC = 0b00001000;
     PORTC = 0b00010010;
-
-    EEADR = 0x00;
-    EEDATA = 0x45;
-    EECON1bits.WREN = 1;
-    EECON2 = 0x55;
-    EECON2 = 0xAA;
-    EECON1bits.WR = 1;
+    eepromwrite(0x00,0x45);
 }
 void volt5(){
 
@@ -908,194 +932,138 @@ void volt5(){
     TRISC = 0b00010000;
     PORTC = 0b00000001;
     PORTAbits.RA1 = 0;
-
-    EEADR = 0x00;
-    EEDATA = 0x25;
-    EECON1bits.WREN = 1;
-    EECON2 = 0x55;
-    EECON2 = 0xAA;
-    EECON1bits.WR = 1;
-
-    _delay((unsigned long)((20)*(20000000/4000.0)));
-    EEADR = 0x01;
-    EEDATA = 0x00;
-    EECON1bits.WREN = 1;
-    EECON2 = 0x55;
-    EECON2 = 0xAA;
-    EECON1bits.WR = 1;
+    dem2 = 0x00;
+    eepromwrite(0x00,0x25);
+    mydelay(253);
+    eepromwrite(0x01,0x00);
 }
 void inc200mv(){
-        TRISCbits.TRISC4 = 0x00;
-        PORTCbits.RC4 = 1;
-        _delay((unsigned long)((10)*(20000000/4000.0)));
-        PORTCbits.RC4 = 0;
-
-        _delay((unsigned long)((10)*(20000000/4000.0)));
+    TRISCbits.TRISC4 = 0x00;
+    PORTCbits.RC4 = 1;
+    mydelay(253);
+    TRISCbits.TRISC4 = 0x01;
+    mydelay(253);
 }
 void dec200mv(){
-        TRISCbits.TRISC3 = 0x00;
-        PORTCbits.RC3 = 0;
-        _delay((unsigned long)((10)*(20000000/4000.0)));
-        PORTCbits.RC3 = 1;
-        _delay((unsigned long)((10)*(20000000/4000.0)));
+    TRISCbits.TRISC3 = 0x01;
+    mydelay(253);
+    TRISCbits.TRISC3 = 0x00;
+    PORTCbits.RC3 = 1;
+    mydelay(253);
 }
-void continuous(){
+void INOV(){
 
 
 
     TRISC = 0b00010000;
     PORTC = 0b00001000;
     PORTAbits.RA1 = 1;
-
-    if(changed == 0){
-
-        EEADR = 0x01;
-        EEDATA = 0x01;
-        EECON1bits.WREN = 1;
-        EECON2 = 0x55;
-        EECON2 = 0xAA;
-        EECON1bits.WR = 1;
-
-        _delay((unsigned long)((20)*(20000000/4000.0)));
-        EEADR = 0x00;
-        EEDATA = 0x25;
-        EECON1bits.WREN = 1;
-        EECON2 = 0x55;
-        EECON2 = 0xAA;
-        EECON1bits.WR = 1;
-    }
     if(changed == 1){
 
-        EEADR = 0x01;
-        EEDATA = 0x01;
-        EECON1bits.WREN = 1;
-        EECON2 = 0x55;
-        EECON2 = 0xAA;
-        EECON1bits.WR = 1;
-
-        _delay((unsigned long)((20)*(20000000/4000.0)));
-        EEADR = 0x00;
-        EECON1bits.RD = 1;
-        eep1 = EEDATA;
+        eepromwrite(0x01,0x01);
+        mydelay(253);
+        eep1 = eepromread(0x00);
         if(eep1 > 0x25){
-            for(int i = 0x01; i<= eep1-0x25 ;i++ ){
+            for(int i = 0x00; i<= eep1-0x25 ;i++){
                 inc200mv();
+                mydelay(253);
             }
+            dem2 = eep1 -0x25;
         }
         if(eep1 < 0x25){
-            for(int i = 0x01; i <= 0x25 - eep1; i++){
+            for(int i = 0x00; i <= 0x25 - eep1; i++){
                 dec200mv();
+                mydelay(253);
+            }
+            dem2 = 0x25 - eep1;
+        }
+        mydelay(178);
+        while(PORTAbits.RA2 == 1){
+            if(PORTAbits.RA0 == 0){
+                inc200mv();
+                dem2 ++;
+                char t = 0x25 + dem2;
+                eepromwrite(0x00,t);
+                mydelay(178);
+            }
+            if(PORTAbits.RA4 == 0){
+                dec200mv();
+                dem2 --;
+                char t1 = 0x25 + dem2;
+                eepromwrite(0x00,t1);
+                mydelay(178);
             }
         }
+        volt5();
     }
-}
-void __attribute__((picinterrupt(("")))) ISR(void){
-    if(INTCONbits.INTF == 1){
-        dem1++;
-        switch(dem1){
-        case 1: volt5(); break;
-        case 2: continuous(); break;
-        case 3: volt5(); break;
-        case 4: volt9(); break;
-        case 5: volt12(); dem1 = 0; break;
-    }
-        INTCONbits.INTF = 0;
+    if(changed == 0){
+        eepromwrite(0x01,0x01);
+        mydelay(253);
+        eepromwrite(0x00,0x25);
+        mydelay(178);
+        while(PORTAbits.RA2 == 1){
+            if(PORTAbits.RA0 == 0){
+                inc200mv();
+                dem2 ++;
+                char t = 0x25 + dem2;
+                eepromwrite(0x00,t);
+                mydelay(178);
+            }
+            if(PORTAbits.RA4 == 0){
+                dec200mv();
+                dem2 --;
+                char t1 = 0x25 + dem2;
+                eepromwrite(0x00,t1);
+                mydelay(178);
+            }
+        }
+        volt5();
     }
 }
 void main(void) {
-    TRISA = 1;
-    TRISCbits.TRISC0 = 0x00;
-    TRISCbits.TRISC2 = 0x00;
-    TRISCbits.TRISC1 = 0x00;
-    TRISAbits.TRISA5 = 0x00;
-    PORTCbits.RC0 = 0;
-    PORTCbits.RC1 = 0;
-    PORTCbits.RC2 = 0;
-    PORTAbits.RA1 = 0;
+    TRISC = 0b00011000;
+    PORTC = 0b00000000;
     CMCON = 0b00000111;
     OPTION_REG = 0b00000000;
-    INTCONbits.GIE =1;
-    INTCONbits.PEIE = 1;
-    INTCONbits.INTE =1;
+    TRISA = 0b11111101;
+    PORTAbits.RA1 = 0;
 
-    TRISAbits.TRISA0 = 0x01;
-    TRISAbits.TRISA4 = 0x01;
-    TRISAbits.TRISA2 = 0x01;
-
-
+    TRISCbits.TRISC3 = 0x01;
+    mydelay(22);
     TRISCbits.TRISC3 = 0x00;
     PORTCbits.RC3 = 0;
-    _delay((unsigned long)((100)*(20000000/4000.0)));
-    TRISCbits.TRISC3 = 0x01;
-    _delay((unsigned long)((10)*(20000000/4000.0)));
 
-
-
-    EEADR = 0x00;
-    EECON1bits.RD = 1;
-    eepdata = EEDATA;
-
-    _delay((unsigned long)((20)*(20000000/4000.0)));
-    EEADR = 0x01;
-    EECON1bits.RD = 1;
-    eepselect = EEDATA;
-
+    eepdata = eepromread(0x00);
+    mydelay(253);
+    eepselect = eepromread(0x01);
     if(eepdata == 0x60){
-        dem1 = 0;
-        volt12();
+        dem1 = 3;
     }
     if(eepdata == 0x25 && eepselect == 0x00 ){
-        dem1 = 1;
-        volt5();
+        dem1 = 0;
     }
     if(eepdata == 0x45){
-        dem1 = 4;
-        volt9();
+        dem1 = 2;
     }
     if(eepdata == 0x25 && eepselect == 0x01){
-        dem1 = 2;
-        continuous();
+        dem1 = 1;
     }
     if(eepdata != 0x25 && eepselect == 0x01){
-        dem1 = 2;
+        dem1 = 1;
         changed = 1;
-        continuous();
     }
-    if(eepdata == 0xff ){
-        volt5();
-    }
-
     while(1){
+    dem1++;
+    switch(dem1){
+        case 1: volt5(); break;
+        case 2: INOV(); break;
+        case 3: volt9(); break;
+        case 4: volt12(); dem1 = 0; break;
+    }
+    mydelay(178);
+    while(PORTAbits.RA2 == 1){
 
-        while(PORTAbits.RA1 == 1){
-        if(PORTAbits.RA0 == 0){
-            inc200mv();
-
-            dem2 ++;
-            EEADR = 0x00;
-            char t = 0x25 + dem2;
-            EEDATA = t;
-            EECON1bits.WREN = 1;
-            EECON2 = 0x55;
-            EECON2 = 0xAA;
-            EECON1bits.WR = 1;
-        }
-
-        if(PORTAbits.RA4 == 0){
-            dec200mv();
-
-            dem2 --;
-            EEADR = 0x00;
-            char t1 = 0x25 + dem2;
-            EEDATA = t1;
-            EECON1bits.WREN = 1;
-            EECON2 = 0x55;
-            EECON2 = 0xAA;
-            EECON1bits.WR = 1;
-        }
-        _delay((unsigned long)((50)*(20000000/4000.0)));
-        }
-
+    }
     }
     return;
 }
